@@ -36,7 +36,7 @@ To provide a secure system
 
     roles {
       **Type** **Name**
-      uuid id PK
+      int id PK
       string name
     }
     
