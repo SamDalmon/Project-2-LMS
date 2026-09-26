@@ -29,7 +29,6 @@ pnpm-debug.log*
 .env.*.local
 
 # --- IDEs & Editors ---
-.vscode/
 .idea/
 *.swp
 *.swo

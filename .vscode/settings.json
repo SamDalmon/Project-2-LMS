@@ -1,3 +1,10 @@
 {
-  "python.defaultInterpreterPath": "C:/Users/seven/Programming-Projects/Project-2-LMS/backend/main-venv/Scripts/python"
+  "python.defaultInterpreterPath": "${workspaceFolder}/backend/main-venv/Scripts/python.exe",
+  "cSpell.ignoreWords": [
+    "staticfiles"
+  ],
+  "cSpell.words": [
+    "pycache",
+    "venv"
+  ]
 }
