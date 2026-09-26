@@ -8,8 +8,8 @@ To provide a secure system
 ## Database Structure
 ```mermaid
   erDiagram
-    courses ||--o{ course-enrollment : has
-    users ||--o{ course-enrollment : has
+    courses ||--o{ course_enrollment : has
+    users ||--o{ course_enrollment : has
     users }o--|| roles : has
 
     courses {
@@ -19,19 +19,19 @@ To provide a secure system
       string description
     }
 
-    course-enrollment {
+    course_enrollment {
       **Type** **Name**
       uuid id PK
-      uuid course-id FK
-      uuid user-id FK
+      uuid course_id FK
+      uuid user_id FK
     }
     
     users {
       **Type** **Name**
       uuid id PK
       string username
-      string password
-     uuid role-id FK
+      string password_hash
+     uuid role_id FK
     }
 
     roles {
