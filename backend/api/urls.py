@@ -1,0 +1,22 @@
+from django.urls import path
+from .views import (
+  CourseEnrollmentListCreateView,
+  CourseEnrollmentDetailView,
+  CourseListCreateView,
+  CourseDetailView,
+  UserListCreateView,
+  UserDetailView,
+  RoleListCreateView,
+  RoleDetailView
+)
+
+urlpatterns = [
+  path('courses/', CourseListCreateView.as_view(), name='course-list-create'),
+  path('courses/<int:pk>', CourseDetailView.as_view(), name='course-detail'),
+  path('course-enrollments/', CourseEnrollmentListCreateView.as_view(), name='course-enrollment-list-create'),
+  path('course-enrollments/<int:pk>', CourseEnrollmentDetailView.as_view(), name='course-enrollment-detail'),
+  path('users/', UserListCreateView.as_view(), name='user-list-create'),
+  path('users/<int:pk>', UserDetailView.as_view(), name='user-detail'),
+  path('roles/', RoleListCreateView.as_view(), name='role-list-create'),
+  path('roles/<int:pk>', RoleDetailView.as_view(), name='role-detail'),
+]
