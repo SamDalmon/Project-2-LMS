@@ -5,12 +5,19 @@ To provide a secure system
 * for Students to look at courses and enroll
 * for Teachers to manage courses
 
+# How to start
+
+**Backend**: ```python manage.py runserver```
+
 ## Database Structure
 ```mermaid
   erDiagram
-    courses ||--o{ course_enrollment : has
-    users ||--o{ course_enrollment : has
+    courses ||--o{ course_enrollments : has
+    users ||--o{ course_enrollments : has
     users }o--|| roles : has
+    roles ||--o{ role_permissions : has
+    permissions ||--o{ role_permissions : has
+    
 
     courses {
       **Type** **Name**
@@ -19,7 +26,7 @@ To provide a secure system
       string description
     }
 
-    course_enrollment {
+    course_enrollments {
       **Type** **Name**
       uuid id PK
       uuid course_id FK
@@ -38,6 +45,20 @@ To provide a secure system
       **Type** **Name**
       int id PK
       string name
+    }
+
+    permissions {
+      **Type** **Name**
+      int id PK
+      string permission_string
+      string description
+    }
+
+    role_permissions {
+      **Type** **Name**
+      int id PK
+      int role_id FK
+      int permission_id FK
     }
     
 ```
