@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Course, CourseEnrollment, Role, User
+from .models import Course, CourseEnrollment, Role, User, Permission, RolePermission
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
@@ -20,3 +20,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = User
     fields = ["url", "username", "password_hash", "role_id"]
+
+class PermissionSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = Permission
+    fields = ["url", "permission_string", "description"]
+
+class RolePermissionSerializer(serializers.HyperlinkedModelSerializer):
+  class Meta:
+    model = RolePermission
+    fields = ["url", "role_id", "permission_id"]
