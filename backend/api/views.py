@@ -37,13 +37,3 @@ class UserListCreateView(generics.ListCreateAPIView):
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = User.objects.all()
   serializer_class = UserSerializer
-
-
-# Role Views
-class RoleListCreateView(generics.ListCreateAPIView):
-  queryset = Role.objects.all()
-  serializer_class = RoleSerializer
-
-class RoleDetailView(generics.RetrieveUpdateDestroyAPIView):
-  queryset = Role.objects.all()
-  serializer_class = RoleSerializer

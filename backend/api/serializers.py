@@ -11,11 +11,6 @@ class CourseEnrollmentSerializer(serializers.HyperlinkedModelSerializer):
     model = CourseEnrollment
     fields = ["url", "course_id", "user_id"]
 
-class RoleSerializer(serializers.HyperlinkedModelSerializer):
-  class Meta:
-    model = Role
-    fields = ["url", "name"]
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = User
