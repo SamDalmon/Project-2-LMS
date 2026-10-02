@@ -47,25 +47,3 @@ class RoleListCreateView(generics.ListCreateAPIView):
 class RoleDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Role.objects.all()
   serializer_class = RoleSerializer
-
-
-# Permission Views
-
-class PermissionListView(generics.ListAPIView):
-  queryset = Permission.objects.all()
-  serializer_class = PermissionSerializer
-
-class PermissionRetrieveView(generics.RetrieveAPIView):
-  queryset = Permission.objects.all()
-  serializer_class = PermissionSerializer
-
-
-# Role Permission Views
-class RolePermissionListView(generics.ListAPIView):
-  queryset = RolePermission.objects.all()
-  serializer_class = RolePermissionSerializer
-
-class RolePermissionRetrieveView(generics.RetrieveAPIView):
-  queryset = RolePermission.objects.all()
-  serializer_class = RolePermissionSerializer
-  

@@ -23,8 +23,4 @@ urlpatterns = [
   path('users/<int:pk>', UserDetailView.as_view(), name='user-detail'),
   path('roles/', RoleListCreateView.as_view(), name='role-list-create'),
   path('roles/<int:pk>', RoleDetailView.as_view(), name='role-detail'),
-  path('permissions/', PermissionListView.as_view(), name='permission-list'),
-  path('permissions/<int:pk>', PermissionRetrieveView.as_view(), name='permission-retrieve'),
-  path('role-permissions/', RolePermissionListView.as_view(), name='role-permission-list'),
-  path('role-permissions/<int:pk>', RolePermissionRetrieveView.as_view(), name='role-permission-retrieve'),
 ]
