@@ -6,9 +6,6 @@ from .serializers import (
   CourseEnrollmentSerializer,
   CourseSerializer,
   UserSerializer,
-  RoleSerializer,
-  PermissionSerializer,
-  RolePermissionSerializer
 )
 
 # Course Views

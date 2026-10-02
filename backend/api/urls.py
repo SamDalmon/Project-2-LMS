@@ -6,12 +6,6 @@ from .views import (
   CourseDetailView,
   UserListCreateView,
   UserDetailView,
-  RoleListCreateView,
-  RoleDetailView,
-  PermissionListView,
-  PermissionRetrieveView,
-  RolePermissionListView,
-  RolePermissionRetrieveView
 )
 
 urlpatterns = [
