@@ -1,6 +1,10 @@
 {
   "python.defaultInterpreterPath": "${workspaceFolder}/backend/main-venv/Scripts/python.exe",
   "cSpell.ignoreWords": [
+    "allauth",
+    "authtoken",
+    "rolepermissions",
+    "socialaccount",
     "staticfiles"
   ],
   "cSpell.words": [
