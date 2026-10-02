@@ -1,5 +1,7 @@
-from rest_framework import generics
-from .models import CourseEnrollment, Course, User, Role, Permission, RolePermission
+from rest_framework import generics, permissions
+from django.contrib.auth.models import User
+from .models import CourseEnrollment, Course
+
 from .serializers import (
   CourseEnrollmentSerializer,
   CourseSerializer,
@@ -37,3 +39,4 @@ class UserListCreateView(generics.ListCreateAPIView):
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = User.objects.all()
   serializer_class = UserSerializer
+  permission_classes = [permissions.IsAuthenticated]

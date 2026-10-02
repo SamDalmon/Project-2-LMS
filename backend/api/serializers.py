@@ -1,5 +1,6 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Course, CourseEnrollment, Role, User, Permission, RolePermission
+from .models import Course, CourseEnrollment
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
@@ -14,4 +15,4 @@ class CourseEnrollmentSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = User
-    fields = ["url", "username", "password_hash", "role_id"]
+    fields = ["id", "username", "email", "first_name", "last_name"]
