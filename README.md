@@ -21,6 +21,12 @@ To provide a secure system
 
 **Backend**: ```python manage.py runserver```
 
+# Testing
+
+## Backend
+* ```python manage.py test``` to run all tests
+* ```python manage.py test {appName}``` to test a specific app
+
 ## Database Structure
 ```mermaid
   erDiagram
