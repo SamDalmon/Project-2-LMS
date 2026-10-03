@@ -4,6 +4,7 @@
     "allauth",
     "authtoken",
     "rolepermissions",
+    "runserver",
     "socialaccount",
     "staticfiles"
   ],
