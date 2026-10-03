@@ -53,5 +53,5 @@ class CreateAvailablePermissionsTests(TestCase):
     
         with self.assertRaises(Exception):
           createAvailablePermissions(permission_matrix)
-    
-    
+
+          
