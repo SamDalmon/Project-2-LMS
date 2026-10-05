@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rolepermissions',
     
     'api',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -151,4 +152,6 @@ MAILERS = {
     },
 }
 
-ROLEPERMISSIONS_MODULE = "config.roles"
+ROLEPERMISSIONS_MODULE = "users.roles"
+
+AUTH_USER_MODEL = "users.CustomUser"
