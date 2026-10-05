@@ -1,5 +1,5 @@
 from django.test import TestCase
-from config.roles import createAvailablePermissions
+from backend.users.roles import createAvailablePermissions
 
 class CreateAvailablePermissionsTests(TestCase):
 
