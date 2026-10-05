@@ -1,12 +1,14 @@
 from rolepermissions.roles import AbstractUserRole
 from backend.users.constants import ModelAction, CRUD_ACTIONS, Model
 
+makePermissionKey = lambda model, action: f"{model}_{action}"
+
 # create a availablePermissions dictionary from a permissions matrix
 def createAvailablePermissions(permissionMatrix):
   availablePermissions = {}
   for modelStr, allowedActions in permissionMatrix.items():
     for allowedAction in allowedActions:
-      availablePermissions[f"{allowedAction}_{modelStr}"] = True
+      availablePermissions[makePermissionKey(modelStr, allowedAction)] = True
   return availablePermissions
 
 class Admin(AbstractUserRole):
