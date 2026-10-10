@@ -1,5 +1,5 @@
 from django.test import TestCase
-from backend.users.roles import createAvailablePermissions
+from users.roles import createAvailablePermissions
 
 class CreateAvailablePermissionsTests(TestCase):
 
@@ -13,12 +13,12 @@ class CreateAvailablePermissionsTests(TestCase):
     }
 
     expected_available_permissions = {
-      "create_user": True,
-      "enroll_course": True,
-      "un_enroll_course": True,
-      "read_course_enrollment": True,
-      "delete_course_enrollment": True,
-      "update_course_enrollment": True,
+      "user_create": True,
+      "course_enroll": True,
+      "course_un_enroll": True,
+      "course_enrollment_read": True,
+      "course_enrollment_delete": True,
+      "course_enrollment_update": True,
     }
 
     result = createAvailablePermissions(permission_matrix)
@@ -35,8 +35,8 @@ class CreateAvailablePermissionsTests(TestCase):
       }
   
       expected_available_permissions = {
-        "enroll_course": True,
-        "un_enroll_course": True,
+        "course_enroll": True,
+        "course_un_enroll": True,
       }
   
       result = createAvailablePermissions(permission_matrix)
@@ -47,8 +47,8 @@ class CreateAvailablePermissionsTests(TestCase):
         """Test that the CreateAvailablePermissions function create a available_permissions dictionary correctly"""
     
         permission_matrix = [
-            "create_course",
-            "delete course"
+            "course_create",
+            "course_delete"
         ]
     
         with self.assertRaises(Exception):
