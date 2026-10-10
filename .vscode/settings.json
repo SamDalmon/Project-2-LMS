@@ -3,10 +3,12 @@
   "cSpell.ignoreWords": [
     "allauth",
     "authtoken",
+    "makemigrations",
     "rolepermissions",
     "runserver",
     "socialaccount",
-    "staticfiles"
+    "staticfiles",
+    "viewsets"
   ],
   "cSpell.words": [
     "pycache",
