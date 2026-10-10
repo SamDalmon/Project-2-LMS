@@ -21,6 +21,10 @@ To provide a secure system
 
 **Backend**: ```python manage.py runserver```
 
+# If theres a database schema change
+1. ```python manage.py makemigrations```
+2. ```python manage.py migrate```
+
 # Testing
 
 ## Backend
@@ -80,3 +84,5 @@ To provide a secure system
     }
     
 ```
+
+# Future Improvements 
