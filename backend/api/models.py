@@ -13,3 +13,11 @@ class CourseEnrollment(models.Model):
     related_name="course_enrollment"
   )
   course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+  class Meta:
+    constraints = [
+      models.UniqueConstraint(
+        fields=["user_id", "course_id"],
+        name="unique_student_enrollment"
+      )
+    ]
