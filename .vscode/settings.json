@@ -8,6 +8,7 @@
     "runserver",
     "socialaccount",
     "staticfiles",
+    "unenroll",
     "viewsets"
   ],
   "cSpell.words": [
