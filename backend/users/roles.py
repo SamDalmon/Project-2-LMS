@@ -1,5 +1,5 @@
 from rolepermissions.roles import AbstractUserRole
-from backend.users.constants import ModelAction, CRUD_ACTIONS, Model
+from .constants import ModelAction, CRUD_ACTIONS, Model
 
 makePermissionKey = lambda model, action: f"{model}_{action}"
 

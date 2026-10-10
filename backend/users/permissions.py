@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 from rolepermissions.checkers import has_permission
-from roles import makePermissionKey
-from constants import (Model, ModelAction)
+from .roles import makePermissionKey
+from .constants import (Model, ModelAction)
 
 
 class CanManageUsers(BasePermission):
