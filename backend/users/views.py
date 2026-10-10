@@ -3,7 +3,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status, viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
-from .constants import Role
 from django.contrib.auth import get_user_model
 from .permissions import CanManageUsers
 from .serializers import UserSerializer
