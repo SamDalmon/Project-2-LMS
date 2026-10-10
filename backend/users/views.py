@@ -1,11 +1,15 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status, viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
+from dj_rest_auth.registration.views import RegisterView
 from django.contrib.auth import get_user_model
 from .permissions import CanManageUsers
-from .serializers import UserSerializer
+from .serializers import UserSerializer, RegisterSerializer
+from .forms import CustomUserCreationForm
+from .roles import Teacher, Student
 
 User = get_user_model()
 
@@ -63,3 +67,20 @@ class UserViewSet(
       {"detail": "User rejected"},
       status=status.HTTP_200_OK
     )
+
+
+class RoleRegisterView(RegisterView):
+  serializer_class = RegisterSerializer
+  form_class = CustomUserCreationForm
+  success_url = reverse_lazy("login")
+
+  def get_serializer_context(self):
+      context = super().get_serializer_context()
+      context["role"] = self.role
+      return context
+
+class TeacherRegisterView(RoleRegisterView):
+  role = Teacher
+
+class StudentRegisterView(RoleRegisterView):
+  role = Student
