@@ -1,6 +1,7 @@
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
+from rest_framework.response import Response
 from .models import CourseEnrollment, Course
 from users.permissions import CanSelfEnroll, CanSelfUnEnroll
 
@@ -27,6 +28,7 @@ class CourseEnrollmentViewSet(
   queryset = CourseEnrollment.objects.all()
   serializer_class = CourseEnrollmentSerializer
 
+
   @action(
       detail=True,
       methods=["post"],
@@ -52,6 +54,7 @@ class CourseEnrollmentViewSet(
       status=status.HTTP_201_CREATED
     )
 
+
   @action(
         detail=True,
         methods=["delete"],
@@ -75,5 +78,30 @@ class CourseEnrollmentViewSet(
 
     return Response(
       {"detail": "Enrollment record not found."},
+      status=status.HTTP_404_NOT_FOUND
+    )
+
+
+  @action(
+    detail=False,
+    methods=['get'],
+    permission_classes=[IsAuthenticated],
+  )
+  def enrolled_courses(self, request, pk=None):
+    user = request.user
+
+    courseEnrollments = CourseEnrollment.objects.filter(user_id=user.pk)
+    enrolledCourses = Course.objects.filter(
+      id__in=courseEnrollments.values_list('course_id', flat=True).distinct()
+    )
+
+    if enrolledCourses.exists():
+      return Response(
+        enrolledCourses,
+        status=status.HTTP_200_OK
+      )
+
+    return Response(
+      {"detail": "Enrollment records not found"},
       status=status.HTTP_404_NOT_FOUND
     )
