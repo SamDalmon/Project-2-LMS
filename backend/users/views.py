@@ -79,6 +79,18 @@ class RoleRegisterView(RegisterView):
       context["role"] = self.role
       return context
 
+  def create(self, request, *args, **kwags):
+    serializer = self.get_serializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = self.perform_create(serializer)
+
+    headers = self.get_success_headers(serializer.data)
+    response_data = self.get_response_data(user)
+
+    response_data['user_id'] = user.id
+
+    return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
+
 class TeacherRegisterView(RoleRegisterView):
   role = Teacher
 
