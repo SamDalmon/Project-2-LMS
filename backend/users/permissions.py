@@ -15,13 +15,13 @@ class CanSelfEnroll(BasePermission):
   message = "You don't have the permissions to enroll"
 
   def has_permission(self, request, view):
-    return has_permission(request.user, makePermissionKey(Model.USER, ModelAction.ENROLL))
+    return has_permission(request.user, makePermissionKey(Model.COURSE, ModelAction.ENROLL))
 
 class CanSelfUnEnroll(BasePermission):
   message = "You don't have the permissions to unenroll"
 
   def has_permission(self, request, view):
-    return has_permission(request.user, makePermissionKey(Model.USER, ModelAction.UNENROLL))
+    return has_permission(request.user, makePermissionKey(Model.COURSE, ModelAction.UNENROLL))
   
 
   
