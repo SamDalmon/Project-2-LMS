@@ -6,6 +6,8 @@ from .views import (
   CourseEnrollmentViewSet
 )
 
+app_name = 'api'
+
 router = DefaultRouter()
 
 router.register(r'course-enrollments', CourseEnrollmentViewSet, basename='course-enrollments')
