@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import CourseEnrollment, Course
+from django.shortcuts import get_object_or_404
 from users.permissions import CanSelfEnroll, CanSelfUnEnroll
 
 from .serializers import (
@@ -35,12 +36,13 @@ class CourseEnrollmentViewSet(
       permission_classes=[IsAuthenticated, CanSelfEnroll],
   ) 
   def enroll(self, request, pk=None):
-    course = self.get_object()
+    course = get_object_or_404(Course, pk=pk)
     student = request.user
+
 
     enrollment, created = CourseEnrollment.objects.get_or_create(
       user_id = student,
-      course = course
+      course_id = course
     )
 
     if not created:
@@ -61,12 +63,12 @@ class CourseEnrollmentViewSet(
         permission_classes=[IsAuthenticated, CanSelfUnEnroll],
   ) 
   def unenroll(self, request, pk=None):
-    course = self.get_object()
+    course = get_object_or_404(Course, pk=pk)
     student = request.user
 
     enrollment = CourseEnrollment.objects.filter(
       user_id = student, 
-      course = course
+      course_id = course
     )
 
     if enrollment.exists():
