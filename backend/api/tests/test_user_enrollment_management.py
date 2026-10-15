@@ -82,5 +82,30 @@ class UserEnrollmentManagementTests(TestCase):
     self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
+  def test_get_enrolled_courses_success(self):
+    """Ensure the correct courses are served when getting the list of courses a Student is enrolled in"""
+    enrolled_courses_url = reverse("api:course-enrollments-enrolled-courses")
+
+    CourseEnrollment.objects.bulk_create([
+      CourseEnrollment(
+        user_id = self.user1,
+        course_id = self.course1,
+      ),
+      CourseEnrollment(
+        user_id = self.user2,
+        course_id = self.course2,
+      ),
+    ])
+
+    assign_role(self.user1, Student)
+    self.client.force_authenticate(user=self.user1)  
+    data = {}
+    response = self.client.get(enrolled_courses_url, data, format='json')
+
+    self.assertEqual(response.status_code, status.HTTP_200_OK)
+    print(type(response))
+
+
+
 
     
