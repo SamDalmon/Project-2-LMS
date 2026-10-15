@@ -59,7 +59,7 @@ class CourseEnrollmentViewSet(
 
   @action(
         detail=True,
-        methods=["delete"],
+        methods=["post"],
         permission_classes=[IsAuthenticated, CanSelfUnEnroll],
   ) 
   def unenroll(self, request, pk=None):
