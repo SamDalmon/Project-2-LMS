@@ -3,12 +3,14 @@
   "cSpell.ignoreWords": [
     "allauth",
     "authtoken",
+    "courseenrollment",
     "makemigrations",
     "rolepermissions",
     "runserver",
     "socialaccount",
     "staticfiles",
     "unenroll",
+    "unenrollment",
     "viewsets"
   ],
   "cSpell.words": [
