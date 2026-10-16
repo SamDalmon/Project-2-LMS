@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 from rolepermissions.roles import assign_role
 from ..models import Course, CourseEnrollment
+from ..serializers import CourseSerializer
 from users.roles import Student
 
 User = get_user_model()
@@ -84,7 +85,7 @@ class UserEnrollmentManagementTests(TestCase):
 
   def test_get_enrolled_courses_success(self):
     """Ensure the correct courses are served when getting the list of courses a Student is enrolled in"""
-    enrolled_courses_url = reverse("api:course-enrollments-enrolled-courses")
+    enrolled_courses_url = reverse("api:user-courses")
 
     CourseEnrollment.objects.bulk_create([
       CourseEnrollment(
@@ -96,6 +97,7 @@ class UserEnrollmentManagementTests(TestCase):
         course_id = self.course2,
       ),
     ])
+    expected_data = CourseSerializer(self.course1).data
 
     assign_role(self.user1, Student)
     self.client.force_authenticate(user=self.user1)  
@@ -103,7 +105,10 @@ class UserEnrollmentManagementTests(TestCase):
     response = self.client.get(enrolled_courses_url, data, format='json')
 
     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    print(type(response))
+    
+    data = response.data
+    self.assertEqual(len(data), 1)
+    self.assertEqual(data[0], expected_data)
 
 
 
