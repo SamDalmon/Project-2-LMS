@@ -4,11 +4,11 @@ from .models import Course, CourseEnrollment
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = Course
-    fields = ["url", "name", "description"]
+    fields = ["id", "name", "description"]
 
 class CourseEnrollmentSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = CourseEnrollment
-    fields = ["url", "course_id", "user_id"]
+    fields = ["id", "course_id", "user_id"]
 
 
