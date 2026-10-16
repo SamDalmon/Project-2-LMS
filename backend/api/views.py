@@ -166,3 +166,15 @@ class EnrollmentActionViewSet(viewsets.GenericViewSet):
       {"detail": "Enrollment record not found."},
       status=status.HTTP_404_NOT_FOUND
     )
+
+
+class EnrolledCoursesView(generics.ListAPIView):
+  serializer_class = CourseSerializer
+  permission_classes=[IsAuthenticated]
+
+  def get_queryset(self):
+    user = self.request.user
+
+    return Course.objects.filter(courseenrollment__user_id=user)
+  
+  
