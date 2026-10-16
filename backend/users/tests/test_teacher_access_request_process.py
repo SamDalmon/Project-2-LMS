@@ -106,7 +106,7 @@ class AccessRequestTests(TestCase):
 
     response = self.client.post(approve_url, data, format='json')
     updated_teacher = User.objects.get(pk=teacher.pk)
-    print(response)
+  
     self.assertEqual(response.status_code, status.HTTP_200_OK)
     self.assertEqual(updated_teacher.status, CustomUser.StatusChoices.ACTIVE)
 
