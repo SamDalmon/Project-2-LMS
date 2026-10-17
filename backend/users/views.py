@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from dj_rest_auth.registration.views import RegisterView
 from rolepermissions.checkers import get_user_roles
 from django.contrib.auth import get_user_model
-from .permissions import CanManageUsers
+from .permissions import CanManageUsers, IsActive
 from .serializers import UserSerializer, RegisterSerializer
 from .forms import CustomUserCreationForm
 from .roles import Teacher, Student
@@ -25,7 +25,7 @@ class UserViewSet(
 ):
   queryset = User.objects.all()
   serializer_class = UserSerializer
-  permission_classes=[IsAuthenticated, CanManageUsers]
+  permission_classes=[IsAuthenticated, IsActive, CanManageUsers]
 
   # Create your views here.
   @action(
@@ -72,7 +72,7 @@ class UserViewSet(
 
 
 class UserPermissionsView(generics.ListAPIView):
-  permission_classes = [IsAuthenticated]
+  permission_classes = [IsAuthenticated, IsActive]
 
   def get(self, request):
     user = request.user
@@ -91,7 +91,7 @@ class UserPermissionsView(generics.ListAPIView):
 
 
 class UserConstantsView(APIView):
-  permission_classes = [IsAuthenticated]
+  permission_classes = [IsAuthenticated, IsActive]
 
   def get(self, request, *args, **kwargs):
     constants_data = {

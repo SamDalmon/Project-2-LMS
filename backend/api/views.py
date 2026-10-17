@@ -9,6 +9,7 @@ from users.permissions import (
   CanSelfUnEnroll,
   CanCreateCourses,
   CanDeleteCourses,
+  IsActive,
 )
 
 from .serializers import (
@@ -20,7 +21,7 @@ from .serializers import (
 class CourseListCreateView(generics.ListCreateAPIView):
   queryset = Course.objects.all()
   serializer_class = CourseSerializer
-  base_permissions = [IsAuthenticated]
+  base_permissions = [IsAuthenticated, IsActive]
   
   action_permissions = {
     'POST': CanCreateCourses,
@@ -38,7 +39,7 @@ class CourseListCreateView(generics.ListCreateAPIView):
 class CourseDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Course.objects.all()
   serializer_class = CourseSerializer
-  base_permissions = [IsAuthenticated]
+  base_permissions = [IsAuthenticated, IsActive]
     
   action_permissions = {
     'UPDATE': CanCreateCourses,
@@ -57,7 +58,7 @@ class CourseDetailView(generics.RetrieveUpdateDestroyAPIView):
 class EnrollmentActionViewSet(viewsets.GenericViewSet):
   queryset = CourseEnrollment.objects.all()
   serializer_class = CourseEnrollmentSerializer
-  base_permissions = [IsAuthenticated]
+  base_permissions = [IsAuthenticated, IsActive]
 
   action_permissions = {
     'POST': CanSelfEnroll,
@@ -127,7 +128,7 @@ class EnrollmentActionViewSet(viewsets.GenericViewSet):
 
 class EnrolledCoursesView(generics.ListAPIView):
   serializer_class = CourseSerializer
-  permission_classes=[IsAuthenticated]
+  permission_classes=[IsAuthenticated, IsActive]
 
   def get_queryset(self):
     user = self.request.user

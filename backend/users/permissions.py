@@ -2,7 +2,13 @@ from rest_framework.permissions import BasePermission
 from rolepermissions.checkers import has_permission
 from .roles import makePermissionKey
 from .constants import (Model, ModelAction)
+from .models import CustomUser
 
+class IsActive(BasePermission):
+  message = "You must be approved by the admin before you can perform this action"
+
+  def has_permission(self, request, view):
+    return request.user.status == CustomUser.StatusChoices.ACTIVE
 
 class CanManageUsers(BasePermission):
   message = "You must have Manage Users permission to perform this action"
