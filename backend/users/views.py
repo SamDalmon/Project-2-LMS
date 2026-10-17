@@ -1,15 +1,18 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render
+from rest_framework import status, viewsets, mixins, generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework import status, viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 from dj_rest_auth.registration.views import RegisterView
+from rolepermissions.checkers import get_user_roles
 from django.contrib.auth import get_user_model
 from .permissions import CanManageUsers
 from .serializers import UserSerializer, RegisterSerializer
 from .forms import CustomUserCreationForm
 from .roles import Teacher, Student
+from .constants import ModelAction, CRUD_ACTIONS, Role, Model
 
 User = get_user_model()
 
@@ -66,6 +69,38 @@ class UserViewSet(
       {"detail": "User rejected"},
       status=status.HTTP_200_OK
     )
+
+
+class UserPermissionsView(generics.ListAPIView):
+  permission_classes = [IsAuthenticated]
+
+  def get(self, request):
+    user = request.user
+
+    roles = [role.get_name() for role in get_user_roles(user)]
+
+    permissions = set()
+    for role in get_user_roles(user):
+      permissions.update(role.permission_names_list())
+
+    return Response({
+      "username": user.username,
+      "roles": roles,
+      "permissions": permissions,
+    })
+
+
+class UserConstantsView(APIView):
+  permission_classes = [IsAuthenticated]
+
+  def get(self, request, *args, **kwargs):
+    constants_data = {
+      "MODEL_ACTIONS": {model_action.name: model_action.value for model_action in ModelAction},
+      "CRUD_ACTIONS": CRUD_ACTIONS,
+      "ROLES": {role.name: role.value for role in Role},
+      "MODELS": {model.name: model.value for model in Model}
+    }
+    return Response(constants_data, status=status.HTTP_200_OK)
 
 
 class RoleRegisterView(RegisterView):
