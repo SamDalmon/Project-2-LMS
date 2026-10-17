@@ -22,12 +22,12 @@ class UserViewSet(
 ):
   queryset = User.objects.all()
   serializer_class = UserSerializer
+  permission_classes=[IsAuthenticated, CanManageUsers]
 
   # Create your views here.
   @action(
     detail=True,
     methods=["post"],
-    permission_classes=[IsAuthenticated, CanManageUsers],
   )
   def approve(self, request, pk=None):
     user = self.get_object()
@@ -49,7 +49,6 @@ class UserViewSet(
   @action(
     detail=True,
     methods=["post"],
-    permission_classes=[IsAuthenticated, CanManageUsers],
   )
   def reject(self, request, pk=None):
     user = self.get_object()
