@@ -11,7 +11,7 @@ app_name = 'api'
 
 router = DefaultRouter()
 
-router.register(r'courses/<int:pk>/enrollments', EnrollmentActionViewSet, basename='enrollment-actions')
+router.register(r'courses', EnrollmentActionViewSet, basename='enrollment-actions')
 
 urlpatterns = [
   path('courses', CourseListCreateView.as_view(), name='course-list-create'),
