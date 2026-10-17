@@ -66,7 +66,7 @@ class UserEnrollmentManagementTests(TestCase):
     assign_role(self.user1, Student)
     self.client.force_authenticate(user=self.user1)  
     data = {}
-    response = self.client.post(unenroll_url, data, format='json')
+    response = self.client.delete(unenroll_url, data, format='json')
     
     self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -78,7 +78,7 @@ class UserEnrollmentManagementTests(TestCase):
     assign_role(self.user1, Student)
     self.client.force_authenticate(user=self.user1)  
     data = {}
-    response = self.client.post(unenroll_url, data, format='json')
+    response = self.client.delete(unenroll_url, data, format='json')
     
     self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 

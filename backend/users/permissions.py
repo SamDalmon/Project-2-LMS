@@ -17,11 +17,26 @@ class CanSelfEnroll(BasePermission):
   def has_permission(self, request, view):
     return has_permission(request.user, makePermissionKey(Model.COURSE, ModelAction.ENROLL))
 
+
 class CanSelfUnEnroll(BasePermission):
   message = "You don't have the permissions to unenroll"
 
   def has_permission(self, request, view):
     return has_permission(request.user, makePermissionKey(Model.COURSE, ModelAction.UNENROLL))
+
+
+class CanCreateCourses(BasePermission):
+  message = "You don't have the permissions to create a course"
+
+  def has_permission(self, request, view):
+    return has_permission(request.user, makePermissionKey(Model.COURSE, ModelAction.CREATE))
+
+
+class CanDeleteCourses(BasePermission):
+  message = "You don't have the permissions to delete a course"
+
+  def has_permission(self, request, view):
+    return has_permission(request.user, makePermissionKey(Model.COURSE, ModelAction.DELETE))
   
 
   
