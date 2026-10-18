@@ -1,4 +1,4 @@
-# Go Go LMS
+# Fathom LMS
 
 ## Purpose
 To provide a secure system
@@ -18,6 +18,10 @@ To provide a secure system
 **Database**: SQLite   
 
 # How to start
+
+**Frontend**: 
+Run Local: ```npm run dev```
+Local Host: ```http://localhost:5173/```
 
 **Backend**: ```python manage.py runserver```
 
