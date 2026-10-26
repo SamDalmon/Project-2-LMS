@@ -1,0 +1,50 @@
+@import '/src/index.css';
+
+img {
+  background-color: transparent;
+  margin: 5px;
+}
+
+.header {
+  background-color: var(--header-background-color);
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+}
+
+.account-container {
+  display: flex;
+  align-items: center;
+}
+
+.account-icon {
+  color: var(--dark-text);
+  margin: 5px;
+}
+
+.user-info-container {
+  box-sizing: border-box;
+  padding: 5px;
+  min-width: 150px;
+}
+
+.username, .role {
+  color: var(--dark-text);
+  text-align: right;
+  display: block;
+  text-wrap: nowrap;
+}
+
+.vertical-line {
+  background-color: var(--dark-text);
+  width: 2px;
+  margin: 4px;
+  height: 50px;
+  border-radius: 100px;
+}
