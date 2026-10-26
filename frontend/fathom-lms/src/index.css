@@ -4,6 +4,8 @@
   --background-color: #F2F5EA;
   --header-background-color: #D6D8D2;
   --dark-text: #310841;
+
+  --header-height: 3.5rem;
   
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -16,9 +18,18 @@
   --font-xl: 2.25rem;
 }
 
+html {
+  background-image: url('./assets/Background\ image.jpg');
+  background-color: var(--background-color);
+}
+
 html, body {
   margin: 0;
   padding: 0;
+}
+
+main {
+  padding-top: var(--header-height);
 }
 
 h1 {
@@ -28,3 +39,7 @@ h1 {
   text-wrap: nowrap;
 }
 
+h2 {
+  font-size: var(--font-lg);
+  color: var(--dark-text);
+}

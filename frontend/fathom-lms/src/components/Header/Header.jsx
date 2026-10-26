@@ -4,13 +4,11 @@ import "./Header.css"
 import { AccountCircle } from '@mui/icons-material'
 
 export default function Header () {
-  const imageSize = 50
   const accountIconHeight = 45
 
   return (<div className='header'>
     <div className='hero-container'>
       <img id='fathom-logo' src={logo} 
-        width={imageSize} height={imageSize}
         alt='Fathom logo, also link to home screen'
       />
       <h1>{ APP_NAME }</h1>
