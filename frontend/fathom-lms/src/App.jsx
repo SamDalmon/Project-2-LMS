@@ -3,7 +3,7 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import Root from './components/Root'
-import SignIn from './components/SignIn'
+import SignIn from './components/SignIn/SignIn'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={ <Root/> }>
