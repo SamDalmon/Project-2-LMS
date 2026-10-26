@@ -1,0 +1,19 @@
+@import '/src/index.css';
+
+.sign-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.sign-in-container {
+  background-color: var(--background-color);
+  padding: 70px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+} 
