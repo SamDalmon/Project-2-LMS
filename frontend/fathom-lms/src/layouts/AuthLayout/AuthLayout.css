@@ -17,3 +17,10 @@
   align-items: center;
   text-align: center;
 } 
+
+.nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}

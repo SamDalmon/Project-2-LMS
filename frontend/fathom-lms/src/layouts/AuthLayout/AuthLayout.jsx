@@ -2,11 +2,15 @@ import './AuthLayout.css'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 
-export default function AuthLayout ({title, content, onSubmit}) {
+export default function AuthLayout ({title, leftLink, rightLink, content, onSubmit}) {
   return (
     <div className="auth-layout">
       <div className="auth-layout-container">
         <h2>{ title }</h2>
+        <nav className='nav-container'>
+          { leftLink }
+          { rightLink }
+        </nav>
         <Stack spacing={1} direction='column'>
           { content }
           <Button
