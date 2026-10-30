@@ -1,0 +1,23 @@
+@import '../../index.css';
+
+.course-tile {
+  width: 20vw;
+  height: 20vh;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  border: 2px solid #909090;
+  align-items: start;
+  text-align: start;
+  padding: 10px;
+  border-radius: var(--radius-md);
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: auto;
+}
+
+

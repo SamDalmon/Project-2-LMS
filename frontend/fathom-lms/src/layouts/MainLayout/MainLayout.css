@@ -1,0 +1,19 @@
+@import '/src/index.css';
+
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+}
+
+.main-layout-container {
+  background-color: var(--background-color);
+  padding: 70px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  text-align: center;
+} 

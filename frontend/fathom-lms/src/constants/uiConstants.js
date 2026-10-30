@@ -17,6 +17,7 @@ export const SECONDARY_THEME = "#3185FC";
 export const BACKGROUND_COLOR = "#F2F5EA";
 export const HEADER_BACKGROUND_COLOR = "#D6D8D2";
 export const DARK_TEXT = "#310841"
+export const BUTTON_GREY = "#d0d0d0"
 
 //Corner Radii
 export const RADIUS_XS = 2;
