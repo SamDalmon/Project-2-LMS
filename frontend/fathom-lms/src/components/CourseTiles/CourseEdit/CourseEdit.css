@@ -1,0 +1,8 @@
+@import "@/index.css";
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: auto;
+}
