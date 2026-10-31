@@ -1,9 +1,9 @@
-@import '../../index.css';
+@import '@/index.css';
 
 .courses {
   display: grid;
-  grid-template-columns: repeat(2, 20vw);
-  grid-auto-rows: 20vh;
+  grid-template-columns: repeat(2,20vw);
+  grid-auto-rows: max(200px, 20vh);
   gap: 10px;
   width: 100%;
 }
