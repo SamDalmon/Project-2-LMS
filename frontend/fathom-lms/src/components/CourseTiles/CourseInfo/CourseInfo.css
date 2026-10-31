@@ -1,6 +1,6 @@
-@import '../../index.css';
+@import '@/index.css';
 
-info-container {
+.info-container {
   display: flex;
   flex-direction: column;
   gap: 5px;
