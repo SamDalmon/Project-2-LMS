@@ -47,6 +47,7 @@ h1 {
 h2 {
   font-size: var(--font-lg);
   color: var(--dark-text);
+  margin: 0px;
 }
 
 h3 {
