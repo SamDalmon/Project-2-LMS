@@ -1,5 +1,6 @@
+
 import { useState } from "react"
-import { PRIMARY_THEME, SECONDARY_THEME } from "../../constants"
+import { PRIMARY_THEME, SECONDARY_THEME } from "../../../constants"
 import Button from "@mui/material/Button"
 
 export default function StudentActions () {
