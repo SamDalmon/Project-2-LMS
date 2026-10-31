@@ -1,0 +1,49 @@
+@import "@/index.css";
+
+
+.main-container {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-edit-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 4px dashed var(--dark-text);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.add-container {
+  width: 100%;
+  height: 100%;
+  border: 4px dashed var(--dark-text);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-container:hover {
+  border-color: var(--secondary-theme);
+}
+
+.add-container:hover * {
+  color: var(--secondary-theme);
+}
+
+.content-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
