@@ -1,4 +1,4 @@
-@import '/src/index.css';
+@import '@/index.css';
 
 .auth-layout {
   display: flex;
