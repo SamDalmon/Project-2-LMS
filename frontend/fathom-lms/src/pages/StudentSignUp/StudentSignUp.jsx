@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
 import AuthForm from '../../components/AuthForm'
 import SignUpForm from '../../components/SignUpForm'
 
 export default function StudentSignUp () {
+  const navigate = useNavigate();
+
   return (
     <>
       <AuthLayout 
@@ -16,7 +19,7 @@ export default function StudentSignUp () {
             <SignUpForm/>
           </>
         }
-        onSubmit={ () => null } //TODO: Create OnSubmit function
+        onSubmit={ () => navigate('/courses') } //TODO: Create OnSubmit function
       />
     </>
   )
