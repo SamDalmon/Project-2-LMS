@@ -1,23 +1,22 @@
-import { BUTTON_GREY, PRIMARY_THEME } from '../../constants'
+import { useState } from 'react'
 import './CourseTile.css'
-import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
+import CourseInfo from './CourseInfo'
+import StudentActions from './StudentActions'
+import TeacherActions from './TeacherActions'
 
-export default function CourseTile({ title, description }){
-  let isEditing = true;
-  
-  const buttonStyles = {
-    flex: 1,
-    maxWidth: '30%',
-  }
+export default function CourseTile({ role, title, description }){
+  const [isEditing, setIsEditing] = useState(false)
   
   return (
     <>
-      <div className='course-tile'>  
-        <div className='info-container'>
-          <h3 className='title'>{ title }</h3>
-          <p className='description'>{ description }</p>
-        </div>
+      <div className='course-tile'>
+        <CourseInfo
+          role={ role }
+          isEditing={ isEditing }
+          title={ title }
+          description={ description }
+        />  
         <Stack 
           direction='row' 
           spacing={1}  
@@ -26,19 +25,11 @@ export default function CourseTile({ title, description }){
             justifyContent: 'flex-end'
            }}
         >
-          { 
-            isEditing && 
-            <Button 
-              id='enroll-button'
-              variant='contained'
-              sx={{ ...buttonStyles, ...{ backgroundColor: BUTTON_GREY }}}
-            >Cancel</Button>
+          {
+            role === 'teacher' ?
+            <TeacherActions isEditing={ isEditing } setIsEditing={ setIsEditing }/> :
+            <StudentActions />
           }
-          <Button 
-            id='enroll-button'
-            variant='contained'
-            sx={{ ...buttonStyles, ...{ backgroundColor: PRIMARY_THEME }}}
-          >Save</Button>
         </Stack>
       </div>
     </>
