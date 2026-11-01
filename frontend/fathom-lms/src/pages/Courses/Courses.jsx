@@ -3,8 +3,7 @@ import MainLayout from '../../layouts/MainLayout/MainLayout';
 import CourseTile from '../../components/CourseTiles/CourseTile/CourseTile';
 import CourseAdd from '../../components/CourseTiles/CourseAdd/CourseAdd';
 
-export default function Courses () {
-  const role = 'admin'
+export default function Courses ({ role }) {
   const canAddCourses = ['teacher', 'admin'].includes(role)
 
   const coursesData = [
