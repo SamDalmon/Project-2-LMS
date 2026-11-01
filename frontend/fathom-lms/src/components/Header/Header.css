@@ -33,7 +33,7 @@ img {
 .user-info-container {
   box-sizing: border-box;
   padding: 5px;
-  min-width: 150px;
+  min-width: var(--width-account-menu);
 }
 
 .username, .role {

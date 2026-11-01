@@ -21,6 +21,9 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 24px;
+
+  --width-account-menu: 200px;
+  --account-icon-height: 45sp;
 }
 
 html {
