@@ -24,5 +24,10 @@ export default function Header () {
         sx={{ fontSize: accountIconHeight }}
       />
     </div>
-  </div>)
+      </div>
+      { showMenu && 
+        <AccountMenu role={ user.role }/>
+      }
+    </>
+  )
 }
