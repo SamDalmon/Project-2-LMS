@@ -4,7 +4,7 @@ import { AccountCircle } from "@mui/icons-material"
 import { useNavigate } from 'react-router-dom'
 import  { Menu, MenuItem } from '@mui/material'
 
-export default function AccountInfo({ user }){
+export default function AccountInfo({ user, setSignedIn }){
   const navigate = useNavigate()
 
   const id = React.useId()
@@ -20,7 +20,13 @@ export default function AccountInfo({ user }){
   }
 
   const buttons = [
-    {text:'Sign Out', onClick: () => navigate('/sign-in')}
+    {
+      text:'Sign Out', 
+      onClick: () => {
+        setSignedIn(false)
+        navigate('/sign-in')
+      }
+    }
   ]
   if (user.role === 'admin'){
     buttons.unshift({

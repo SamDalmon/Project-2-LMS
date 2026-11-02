@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
 import AuthForm from '../../components/AuthForm'
@@ -6,6 +6,7 @@ import SignUpForm from '../../components/SignUpForm'
 
 export default function TeacherSignUp () {
   const navigate = useNavigate()
+  const { setSignedIn }  = useOutletContext()
 
   return (
     <>
@@ -19,7 +20,12 @@ export default function TeacherSignUp () {
             <SignUpForm/>
           </>
         }
-        onSubmit={ () => navigate('/courses') } //TODO: Create OnSubmit function
+        onSubmit={ 
+          () => {
+            setSignedIn(true)
+            navigate('/courses') 
+          }
+        } //TODO: Create OnSubmit function
       />
     </>
   )

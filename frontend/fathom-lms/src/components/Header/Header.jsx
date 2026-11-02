@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png'
 import "./Header.css"
 import AccountInfo from '../AccountInfo/AccountInfo'
 
-export default function Header ({ user }) {
+export default function Header ({ user, signedIn, setSignedIn }) {
 
   return (
     <>
@@ -14,7 +14,9 @@ export default function Header ({ user }) {
           />
           <h1>{ APP_NAME }</h1>
         </div>
-        <AccountInfo user={ user }/>
+        { signedIn &&
+          <AccountInfo user={ user } setSignedIn={ setSignedIn }/>
+        }
       </div>
     </>
   )

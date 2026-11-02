@@ -11,11 +11,12 @@ export default function Root() {
       role: 'admin'
     }
   )
+  const [ signedIn, setSignedIn ] = useState(false)
 
   return (<>
-    <Header user={user}/>
+    <Header user={user} signedIn={signedIn} setSignedIn={setSignedIn}/>
     <main>
-      <Outlet role={ user.role }/>
+      <Outlet context={{ role: user.role, signedIn, setSignedIn }}/>
     </main>
   </>)
 }
