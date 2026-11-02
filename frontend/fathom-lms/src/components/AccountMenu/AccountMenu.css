@@ -1,7 +1,0 @@
-@import '@/index.css';
-
-.account-menu {
-  position: fixed;
-  margin-top: var(--header-height);
-  right: 0;
-}

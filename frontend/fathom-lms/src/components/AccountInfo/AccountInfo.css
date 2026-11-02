@@ -1,0 +1,32 @@
+@import '@/index.css';
+
+.account-container {
+  display: flex;
+  align-items: center;
+}
+
+.account-icon {
+  color: var(--dark-text);
+  margin: 5px;
+}
+
+.user-info-container {
+  box-sizing: border-box;
+  padding: 5px;
+  min-width: var(--width-account-menu);
+}
+
+.username, .role {
+  color: var(--dark-text);
+  text-align: right;
+  display: block;
+  text-wrap: nowrap;
+}
+
+.vertical-line {
+  background-color: var(--dark-text);
+  width: 2px;
+  margin: 4px;
+  height: 50px;
+  border-radius: 100px;
+}
