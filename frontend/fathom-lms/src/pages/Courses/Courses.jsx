@@ -3,8 +3,10 @@ import MainLayout from '../../layouts/MainLayout/MainLayout';
 import CourseTile from '../../components/CourseTiles/CourseTile/CourseTile';
 import CourseAdd from '../../components/CourseTiles/CourseAdd/CourseAdd';
 import DualSwitch from '../../components/DualSwitch';
+import { useOutletContext } from 'react-router-dom';
 
-export default function Courses ({ role }) {
+export default function Courses () {
+  const { role } = useOutletContext()
   const canAddCourses = ['teacher', 'admin'].includes(role)
   const [filterEnrolled, setFilterEnrolled] = useState('left')
 
