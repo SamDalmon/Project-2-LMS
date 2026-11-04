@@ -2,9 +2,12 @@ import './Courses.css'
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import CourseTile from '../../components/CourseTiles/CourseTile/CourseTile';
 import CourseAdd from '../../components/CourseTiles/CourseAdd/CourseAdd';
+import DualSwitch from '../../components/DualSwitch';
 
 export default function Courses ({ role }) {
   const canAddCourses = ['teacher', 'admin'].includes(role)
+  const [filterEnrolled, setFilterEnrolled] = useState('left')
+
 
   const coursesData = [
     { title: 'Amazing Course 1', description: 'This is the first amazing course' },
@@ -15,6 +18,13 @@ export default function Courses ({ role }) {
   
   return (
     <>
+      { role === 'student' &&  
+        <DualSwitch 
+          alignment={ filterEnrolled } setAlignment={ setFilterEnrolled }
+          textLeft='All Courses' colorLeft={ 'var(--primary-theme)' } 
+          textRight='Enrolled Courses' colorRight={ 'var(--secondary-theme)' }
+        /> 
+      }
       <MainLayout content={
         <>
           <div className='courses'>
