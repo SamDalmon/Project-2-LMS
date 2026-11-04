@@ -64,3 +64,19 @@ p {
   font-size: var(--font-sm);
   color: var(--dark-text);
 }
+
+a {
+  color: var(--secondary-theme);
+}
+
+a:hover {
+  color: #0000FF
+}
+
+a:visited {
+  color: var(--dark-text);
+}
+
+a:visited:hover {
+  color: var(--secondary-theme);
+}
