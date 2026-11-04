@@ -1,0 +1,34 @@
+@import '@/index.css';
+
+dt,dd {
+  color: var(--dark-text);
+  text-align: start;
+  padding: 0px;
+  margin: 0px;
+}
+
+dt { 
+  text-align: end; 
+  text-transform: capitalize;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  width: 40vw;
+  min-width: 400px;
+  border: 2px solid #c1c1c1;
+  border-radius: var(--radius-md);
+  padding: 10px
+}
+
+.info-container {
+  margin: 0;
+  margin-left: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.button-container {
+  margin-left: auto;
+}
