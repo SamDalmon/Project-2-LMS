@@ -1,4 +1,5 @@
 import './Courses.css'
+import { useState } from 'react';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import CourseTile from '../../components/CourseTiles/CourseTile/CourseTile';
 import CourseAdd from '../../components/CourseTiles/CourseAdd/CourseAdd';
@@ -12,10 +13,9 @@ export default function Courses () {
 
 
   const coursesData = [
-    { title: 'Amazing Course 1', description: 'This is the first amazing course' },
-    { title: 'Amazing Course 2', description: 'This is the second amazing course' },
-    { title: 'Amazing Course 3', description: 'This is the third amazing course' },
-
+    { id: 1, title: 'Amazing Course 1', description: 'This is the first amazing course' },
+    { id: 2, title: 'Amazing Course 2', description: 'This is the second amazing course' },
+    { id: 3, title: 'Amazing Course 3', description: 'This is the third amazing course' },
   ]
   
   return (
@@ -27,8 +27,9 @@ export default function Courses () {
           textRight='Enrolled Courses' colorRight={ 'var(--secondary-theme)' }
         /> 
       }
-      <MainLayout content={
+      <MainLayout content={ 
         <>
+          
           <div className='courses'>
             {
               canAddCourses && (
@@ -38,6 +39,7 @@ export default function Courses () {
             {
               coursesData.map((course) => (
                 <CourseTile 
+                  key={ course.id }
                   role={ role }
                   title={ course.title } 
                   description={ course.description }
