@@ -13,33 +13,41 @@ export default function CourseTile({ role, title='', description='' }){
   return (
     <>
       <div className='course-tile'>
-        { (canEdit && isEditing) ? 
+        { (canEdit && isEditing) ?
           <CourseEdit
-            title={ title }
-            description={ description }
-          /> :
-          <CourseInfo
-            title={ title }
-            description={ description }
-          /> 
-        } 
-        <Stack 
-          direction='row' 
-          spacing={1}  
-          sx={{ 
-            width: '100%',
-            justifyContent: 'flex-end'
-           }}
-        >
-          { canEdit ?
-            <TeacherActions 
-              isEditing={ isEditing } 
+              title={ title }
+              description={ description }
+              isEditing={ isEditing }
               setIsEditing={ setIsEditing }
-            /> :
-            <StudentActions />
-          }
-        </Stack>
+          /> : 
+          <>
+            <CourseInfo
+              title={ title }
+              description={ description }
+            /> 
+            <Stack 
+              direction='row' 
+              spacing={1}  
+              sx={{ 
+                width: '100%',
+                justifyContent: 'flex-end'
+              }}
+            >
+              { canEdit ?
+                <TeacherActions 
+                  isEditing={ isEditing } 
+                  setIsEditing={ setIsEditing }
+                  handleSubmit={ null }
+                  handleCancel={ null }
+                /> :
+                <StudentActions />
+                
+              }
+            </Stack>
+          </>
+        }
       </div>
     </>
+        
   )
 }
