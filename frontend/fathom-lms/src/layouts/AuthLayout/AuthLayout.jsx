@@ -1,8 +1,47 @@
 import './AuthLayout.css'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
+import AuthForm from '@/components/AuthForm'
+import SignUpForm from '@/components/SignupForm'
+import { useState } from 'react'
 
-export default function AuthLayout ({title, leftLink, rightLink, content, onSubmit}) {
+export default function AuthLayout ({title, leftLink, rightLink, isSignUp, onSubmit}) {
+  const [ authFields, setAuthFields ] = useState({ 
+  username: '', password: '' 
+})
+  const [ signUpFields, setSignUpFields ] = useState({ 
+    email: '', firstName: '', lastName: '' 
+  })
+
+  const [ formErrors, setFormErrors ] = useState({ 
+    username: false, password: false,
+    email: false, firstName: false, lastName: false
+  })
+
+  const allFields = {...authFields, ...(isSignUp && signUpFields)}
+
+  const handleSubmit = (e) => {
+    if( validateForm() ){
+      onSubmit(e)
+    }
+  }
+
+  const validateForm = () => {
+    var isValid = true
+    const currentErrors = {}
+
+    for( const [field, value] of Object.entries(allFields)) {
+      if( !value.trim() ){ 
+        currentErrors[field] = true
+        isValid = false
+      }
+    }
+
+    setFormErrors(currentErrors)
+
+    return isValid
+  }
+
   return (
     <div className="auth-layout">
       <div className="auth-layout-container">
@@ -12,10 +51,19 @@ export default function AuthLayout ({title, leftLink, rightLink, content, onSubm
           { rightLink }
         </nav>
         <Stack spacing={1} direction='column'>
-          { content }
+          <AuthForm 
+            authFields={ authFields } setAuthFields={ setAuthFields }
+            formErrors= { formErrors } setFormErrors={ setFormErrors }
+          />
+          { isSignUp && 
+            <SignUpForm 
+              signUpFields={ signUpFields } setSignUpFields={ setSignUpFields }
+              formErrors= { formErrors } setFormErrors={ setFormErrors }
+            />
+          }
           <Button
             id='submit-button'
-            onClick={ onSubmit }
+            onClick={ handleSubmit }
             variant='contained'
             sx={{ backgroundColor: 'var(--primary-theme)' }}
           >
