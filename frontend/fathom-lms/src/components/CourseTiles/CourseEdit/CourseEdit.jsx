@@ -47,7 +47,7 @@ export default function CourseEdit({ title='', description='', isEditing, setIsE
   }
 
   return (
-    <>
+    <div className='course-edit-container'>
       <div className='edit-container'>
         <TextField 
           name='title'
@@ -88,6 +88,6 @@ export default function CourseEdit({ title='', description='', isEditing, setIsE
           handleCancel={ handleCancel }
         />
       </div>
-    </>
+    </div>
   )
 }
