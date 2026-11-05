@@ -27,9 +27,6 @@ export default function DualSwitch({
           '& .MuiToggleButtonGroup-grouped': {
             border: 0,
             borderRadius: '50px',
-          },
-          '& .Mui-selected': {
-            '&:hover': { backgroundColor: 'white' },
           }
         }}
       >
@@ -37,6 +34,10 @@ export default function DualSwitch({
           sx={{
             '&.Mui-selected': {
               backgroundColor: colorLeft,
+              '&:hover': { 
+                backgroundColor: colorLeft,
+                filter: 'brightness(0.80)'
+              }
             }
           }}
         >
@@ -46,6 +47,10 @@ export default function DualSwitch({
           sx={{
             '&.Mui-selected': {
               backgroundColor: colorRight,
+              '&:hover': { 
+                backgroundColor: colorRight,
+                filter: 'brightness(0.80)'
+              }
             }
           }}
         >
