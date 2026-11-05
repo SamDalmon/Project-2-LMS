@@ -11,19 +11,15 @@ export default function CourseAdd () {
 
   return (
     <>
-      <div className='main-container'>
+      <div className='main-container' is-editing={ isEditing.toString() }>
         { isEditing ?
           (
-            <>
-              <div className='course-edit-container'>
-                <div className='edit-container'>
-                  <CourseEdit 
-                    isEditing={ isEditing }
-                    setIsEditing={ setIsEditing }
-                  />
-                </div>
-              </div>
-            </> 
+            <div>
+              <CourseEdit 
+                isEditing={ isEditing }
+                setIsEditing={ setIsEditing }
+              />
+            </div> 
           ) : (
             <div 
               className='add-container' 

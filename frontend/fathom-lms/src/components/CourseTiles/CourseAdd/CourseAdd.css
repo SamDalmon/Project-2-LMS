@@ -6,36 +6,25 @@
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.course-edit-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
   border: 4px dashed var(--dark-text);
   border-radius: var(--radius-md);
-  box-sizing: border-box;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-container {
   width: 100%;
   height: 100%;
-  border: 4px dashed var(--dark-text);
-  border-radius: var(--radius-md);
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
 }
 
-.add-container:hover {
+.main-container[is-editing='false']:hover {
   border-color: var(--secondary-theme);
 }
 
-.add-container:hover * {
+.main-container[is-editing='false']:hover * {
   color: var(--secondary-theme);
 }
 
