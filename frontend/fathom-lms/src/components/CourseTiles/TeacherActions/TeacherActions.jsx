@@ -2,14 +2,15 @@ import './TeacherActions.css'
 import { PRIMARY_THEME, SECONDARY_THEME, BUTTON_GREY } from "../../../constants";
 import Button from '@mui/material/Button'
 
-export default function TeacherActions({ isEditing, setIsEditing }) {
+export default function TeacherActions({ 
+  isEditing, setIsEditing, handleSubmit, handleCancel 
+}) {
   const buttonStyles = {
     flex: 1,
     maxWidth: '30%',
     minWidth: 'max-content'
   }
 
-  const onCancel = () => setIsEditing(false)
   const onEdit = () => setIsEditing(true)
 
   return (
@@ -22,13 +23,13 @@ export default function TeacherActions({ isEditing, setIsEditing }) {
                 id='cancel-button'
                 variant='contained'
                 sx={{ ...buttonStyles, ...{ backgroundColor: BUTTON_GREY } }}
-                onClick={ onCancel }
+                onClick={ handleCancel }
               >Cancel</Button>
               <Button
                 id='save-button'
                 variant='contained'
                 sx={{ ...buttonStyles, ...{ backgroundColor: PRIMARY_THEME } }}
-                onClick={ onCancel }
+                onClick={ handleSubmit }
               >Save</Button>
             </>
           ) : (
