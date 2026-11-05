@@ -3,7 +3,6 @@ import './CourseAdd.css'
 import { ControlPoint } from '@mui/icons-material'
 import { DARK_TEXT } from '../../../constants'
 
-import TeacherActions from '../TeacherActions/TeacherActions'
 import CourseEdit from '../CourseEdit/CourseEdit'
 
 
@@ -18,10 +17,7 @@ export default function CourseAdd () {
             <>
               <div className='course-edit-container'>
                 <div className='edit-container'>
-                  <CourseEdit />
-                </div>
-                <div className='actions-container'>
-                  <TeacherActions 
+                  <CourseEdit 
                     isEditing={ isEditing }
                     setIsEditing={ setIsEditing }
                   />
