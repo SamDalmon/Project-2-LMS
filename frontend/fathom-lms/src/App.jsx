@@ -1,5 +1,6 @@
 import {
-  RouterProvider, createBrowserRouter, createRoutesFromElements, Route
+  RouterProvider, createBrowserRouter, createRoutesFromElements, Route,
+  Navigate
 } from 'react-router-dom'
 import './App.css'
 import Root from './components/Root'
@@ -16,6 +17,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path = "/teacher-sign-up" element={ <TeacherSignUp/> }/>
     <Route path = "/courses" element={ <Courses /> }/>
     <Route path = "/user-management" element={ <UserManagement/> }/>
+    <Route path = "*" element={ <Navigate to="/sign-in" replace/> }/>
   </Route>
 ))
 
