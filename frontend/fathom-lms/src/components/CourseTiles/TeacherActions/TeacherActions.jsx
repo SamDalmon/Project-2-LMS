@@ -6,6 +6,7 @@ export default function TeacherActions({ isEditing, setIsEditing }) {
   const buttonStyles = {
     flex: 1,
     maxWidth: '30%',
+    minWidth: 'max-content'
   }
 
   const onCancel = () => setIsEditing(false)

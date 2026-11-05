@@ -8,6 +8,7 @@ export default function StudentActions () {
 
   const buttonStyles = {
     width: '30%',
+    minWidth: 'max-content'
   }
 
   const onClick = () => { setIsEnrolled(!isEnrolled) }
