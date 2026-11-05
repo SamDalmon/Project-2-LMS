@@ -38,7 +38,7 @@ export default function UserCard ({
           borderRadius: '100%', 
         }}
       />
-      <dl className='info-container'>
+      <dl className='user-info-container'>
         {
           Object.entries(userInfo).map(([key, value]) => (
             <React.Fragment key={key}>
