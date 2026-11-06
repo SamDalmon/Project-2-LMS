@@ -1,16 +1,18 @@
 @import '@/index.css';
 
-.account-container {
+.accountContainer {
   display: flex;
   align-items: center;
 }
 
-.account-icon {
+.accountIcon {
   color: var(--dark-text);
   margin: 5px;
 }
 
-.user-info-container {
+.userInfoContainer {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   padding: 5px;
   min-width: var(--width-account-menu);
@@ -23,7 +25,7 @@
   text-wrap: nowrap;
 }
 
-.vertical-line {
+.verticalLine {
   background-color: var(--dark-text);
   width: 2px;
   margin: 4px;

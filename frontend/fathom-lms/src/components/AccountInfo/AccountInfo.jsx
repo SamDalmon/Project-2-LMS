@@ -1,4 +1,4 @@
-import './AccountInfo.css'
+import styles from './AccountInfo.module.css'
 import React, { useState } from 'react'
 import { AccountCircle } from "@mui/icons-material"
 import { useNavigate } from 'react-router-dom'
@@ -37,17 +37,17 @@ export default function AccountInfo({ user, setSignedIn }){
   return (
     <>
       <div 
-        className='account-container' 
+        className={ styles.accountContainer } 
         aria-label='Account options'
         onClick= { handleClick }
       >
-        <div className='vertical-line'></div>
-        <div className='user-info-container'>
-          <span className='username'>{ `${user.firstName} ${user.lastName}` }</span> 
-          <span className='role'>{ user.role }</span>
+        <div className={ styles.verticalLine }></div>
+        <div className={ styles.userInfoContainer }>
+          <span className={ styles.username }>{ `${user.firstName} ${user.lastName}` }</span> 
+          <span className={ styles.role }>{ user.role }</span>
         </div>
         <AccountCircle 
-          className='account-icon'
+          className={ styles.accountIcon }
           sx={{ fontSize: 'var(--account-icon-height)' }}
         />
       </div>
