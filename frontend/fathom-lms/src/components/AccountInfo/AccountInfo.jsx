@@ -23,6 +23,7 @@ export default function AccountInfo({ user, setSignedIn }){
     {
       text:'Sign Out', 
       onClick: () => {
+        handleClose()
         setSignedIn(false)
         navigate('/sign-in')
       }
@@ -30,7 +31,10 @@ export default function AccountInfo({ user, setSignedIn }){
   ]
   if (user.role === 'admin'){
     buttons.unshift({
-      text: 'User Management', onClick: () => navigate('/user-management')
+      text: 'User Management', onClick: () => {
+        handleClose()
+        navigate('/user-management')
+      }
     })
   }
   
