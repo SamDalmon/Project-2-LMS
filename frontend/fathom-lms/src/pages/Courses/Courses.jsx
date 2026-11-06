@@ -10,14 +10,16 @@ export default function Courses () {
   const { role } = useOutletContext()
   const canAddCourses = ['teacher', 'admin'].includes(role)
   const [filterEnrolled, setFilterEnrolled] = useState('left')
+  const [editingId, setEditingId] = useState()
 
+  const PLACEHOLDER_ID = -1;
 
   const coursesData = [
     { id: 1, title: 'Amazing Course 1', description: 'This is the first amazing course' },
     { id: 2, title: 'Amazing Course 2', description: 'This is the second amazing course' },
     { id: 3, title: 'Amazing Course 3', description: 'This is the third amazing course' },
   ]
-  
+
   return (
     <>
       { role === 'student' &&  
@@ -28,26 +30,29 @@ export default function Courses () {
         /> 
       }
       <MainLayout content={ 
-        <>
-          
           <div className='courses'>
             {
               canAddCourses && (
-                <CourseAdd role={ role }/>
+                <CourseAdd 
+                  dummyCourse={{ id: PLACEHOLDER_ID, title: '', description: '' }}
+                  isEditing={ editingId === PLACEHOLDER_ID }
+                  setEditingId={ setEditingId }
+                />
               )
             }
             {
               coursesData.map((course) => (
                 <CourseTile 
                   key={ course.id }
-                  role={ role }
-                  title={ course.title } 
+                  role= { role }
+                  course={ course }
                   description={ course.description }
+                  isEditing={ editingId === course.id }
+                  setEditingId={ setEditingId }
                 />
               ))
             }
           </div>
-        </>
       }/>
     </>
   )

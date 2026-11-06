@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './CourseTile.css'
 import Stack from '@mui/material/Stack'
 import CourseInfo from '../CourseInfo/CourseInfo'
@@ -6,24 +5,28 @@ import StudentActions from '../StudentActions/StudentActions'
 import TeacherActions from '../TeacherActions/TeacherActions'
 import CourseEdit from '../CourseEdit/CourseEdit'
 
-export default function CourseTile({ role, title='', description='' }){
-  const [isEditing, setIsEditing] = useState(false)
+export default function CourseTile({ 
+  role, course, isEditing, setEditingId 
+}){
   const canEdit = ['teacher', 'admin'].includes(role)
+
+  const setIsEditing = (active=true) => {
+    setEditingId( active ? course.id : null )
+  }
   
   return (
     <>
       <div className='course-tile'>
         { (canEdit && isEditing) ?
           <CourseEdit
-              title={ title }
-              description={ description }
+              course={ course }
               isEditing={ isEditing }
               setIsEditing={ setIsEditing }
           /> : 
           <>
             <CourseInfo
-              title={ title }
-              description={ description }
+              title={ course.title }
+              description={ course.description }
             /> 
             <Stack 
               direction='row' 
@@ -41,7 +44,6 @@ export default function CourseTile({ role, title='', description='' }){
                   handleCancel={ null }
                 /> :
                 <StudentActions />
-                
               }
             </Stack>
           </>

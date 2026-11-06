@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './CourseAdd.css'
 import { ControlPoint } from '@mui/icons-material'
 import { DARK_TEXT } from '../../../constants'
@@ -6,8 +5,13 @@ import { DARK_TEXT } from '../../../constants'
 import CourseEdit from '../CourseEdit/CourseEdit'
 
 
-export default function CourseAdd () {
-  const [isEditing, setIsEditing] = useState(false)
+export default function CourseAdd ({
+  dummyCourse, isEditing, setEditingId
+}) {
+
+  const setIsEditing = (active=true) => {
+    setEditingId( active ? dummyCourse.id : null )
+  }
 
   return (
     <>
@@ -16,6 +20,7 @@ export default function CourseAdd () {
           (
             <div>
               <CourseEdit 
+                course={ dummyCourse }
                 isEditing={ isEditing }
                 setIsEditing={ setIsEditing }
               />
