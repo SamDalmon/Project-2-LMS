@@ -15,7 +15,7 @@ export default function CourseAdd ({
 
   return (
     <>
-      <div className='main-container' is-editing={ isEditing.toString() }>
+      <div className='main-container' is-editing={ isEditing.toString() } aria-label='Add Course'>
         { isEditing ?
           (
             <div>
