@@ -5,11 +5,13 @@ dt,dd {
   text-align: start;
   padding: 0px;
   margin: 0px;
+  margin-left: 10px;
 }
 
 dt { 
-  text-align: end; 
+  text-align: start; 
   text-transform: capitalize;
+  font-weight: bold;
 }
 
 .card-container {

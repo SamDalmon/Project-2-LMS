@@ -42,7 +42,7 @@ export default function UserCard ({
         {
           Object.entries(userInfo).map(([key, value]) => (
             <React.Fragment key={key}>
-              <dt>{ key }:</dt>
+              <dt>{ key }</dt>
               <dd>{ value }</dd>
             </React.Fragment>
           ))  
