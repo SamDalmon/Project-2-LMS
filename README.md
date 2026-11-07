@@ -112,16 +112,16 @@ Local Host: ```http://127.0.0.1:8000/```
 /api/users/<pk>/reject\.<format>/       users.views.UserViewSet users:users-reject
 /api/users/<pk>\.<format>/      users.views.UserViewSet users:users-detail
 /api/users/\.<format>/  users.views.UserViewSet users:users-list
+/api/users/auth/login/  dj_rest_auth.views.LoginView    users:rest_login
+/api/users/auth/logout/ dj_rest_auth.views.LogoutView   users:rest_logout
+/api/users/auth/password/change/        dj_rest_auth.views.PasswordChangeView   users:rest_password_change
+/api/users/auth/password/reset/ dj_rest_auth.views.PasswordResetView    users:rest_password_reset
+/api/users/auth/password/reset/confirm/ dj_rest_auth.views.PasswordResetConfirmView     users:rest_password_reset_confirm
 /api/users/auth/registration/student    users.views.StudentRegisterView users:student-register
 /api/users/auth/registration/teacher    users.views.TeacherRegisterView users:teacher-register
-/api/users/authlogin/   dj_rest_auth.views.LoginView    users:rest_login
-/api/users/authlogout/  dj_rest_auth.views.LogoutView   users:rest_logout
-/api/users/authpassword/change/ dj_rest_auth.views.PasswordChangeView   users:rest_password_change
-/api/users/authpassword/reset/  dj_rest_auth.views.PasswordResetView    users:rest_password_reset
-/api/users/authpassword/reset/confirm/  dj_rest_auth.views.PasswordResetConfirmView     users:rest_password_reset_confirm
-/api/users/authtoken/refresh/   dj_rest_auth.jwt_auth.RefreshViewWithCookieSupport      users:token_refresh
-/api/users/authtoken/verify/    rest_framework_simplejwt.views.TokenVerifyView  users:token_verify
-/api/users/authuser/    dj_rest_auth.views.UserDetailsView      users:rest_user_details
+/api/users/auth/token/refresh/  dj_rest_auth.jwt_auth.RefreshViewWithCookieSupport      users:token_refresh
+/api/users/auth/token/verify/   rest_framework_simplejwt.views.TokenVerifyView  users:token_verify
+/api/users/auth/user/   dj_rest_auth.views.UserDetailsView      users:rest_user_details
 /api/users/constants    users.views.UserConstantsView   users:user-constants
 /api/users/permissions  users.views.UserPermissionsView users:user-permissions
 
