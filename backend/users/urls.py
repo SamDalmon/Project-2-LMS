@@ -19,6 +19,6 @@ urlpatterns = [
   path('auth/registration/student', StudentRegisterView.as_view(), name='student-register'),
   path('permissions', UserPermissionsView.as_view(), name = 'user-permissions'),
   path('constants', UserConstantsView.as_view(), name='user-constants'),
-  path('auth', include('dj_rest_auth.urls')),
+  path('auth/', include('dj_rest_auth.urls')),
   path('', include(router.urls)),
 ]
