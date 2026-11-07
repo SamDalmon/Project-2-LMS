@@ -2,6 +2,7 @@ from rest_framework import generics, viewsets, mixins, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.db.models import Exists, OuterRef
 from .models import CourseEnrollment, Course
 from django.shortcuts import get_object_or_404
 from users.permissions import (
@@ -18,7 +19,10 @@ from .serializers import (
 )
 
 # Course Views
-class CourseListCreateView(generics.ListCreateAPIView):
+class CourseListCreateView(
+  mixins.ListModelMixin,
+  viewsets.GenericViewSet
+):
   queryset = Course.objects.all()
   serializer_class = CourseSerializer
   base_permissions = [IsAuthenticated, IsActive]
@@ -31,10 +35,20 @@ class CourseListCreateView(generics.ListCreateAPIView):
     permissions = list(self.base_permissions)
 
     extra_permissions = self.action_permissions.get(self.request.method)
-    permissions.append(extra_permissions)
-
+    if extra_permissions is not None:
+      permissions.append(extra_permissions)
+    
     return [permission() for permission in permissions]
 
+  def get_queryset(self): 
+    return Course.objects.annotate(
+      is_enrolled = Exists(
+        CourseEnrollment.objects.filter(
+          course_id = OuterRef("pk"),
+          user_id = self.request.user.id
+        )
+      )
+    )
 
 class CourseDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Course.objects.all()
@@ -42,7 +56,7 @@ class CourseDetailView(generics.RetrieveUpdateDestroyAPIView):
   base_permissions = [IsAuthenticated, IsActive]
     
   action_permissions = {
-    'UPDATE': CanCreateCourses,
+    'PUT': CanCreateCourses,
     'DELETE': CanDeleteCourses,
   }
 
@@ -50,7 +64,8 @@ class CourseDetailView(generics.RetrieveUpdateDestroyAPIView):
     permissions = list(self.base_permissions)
 
     extra_permissions = self.action_permissions.get(self.request.method)
-    permissions.append(extra_permissions)
+    if extra_permissions is not None:
+      permissions.append(extra_permissions)
 
     return [permission() for permission in permissions]
   
@@ -69,7 +84,8 @@ class EnrollmentActionViewSet(viewsets.GenericViewSet):
     permissions = list(self.base_permissions)
 
     extra_permissions = self.action_permissions.get(self.request.method)
-    permissions.append(extra_permissions)
+    if extra_permissions is not None:
+      permissions.append(extra_permissions)
 
     return [permission() for permission in permissions]
 
