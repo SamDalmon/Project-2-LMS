@@ -4,14 +4,30 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from .roles import Teacher, Student
 from .models import CustomUser
 from rolepermissions.roles import assign_role
+from rolepermissions.checkers import get_user_roles
+from rolepermissions.permissions import available_perm_status
 from django.db import transaction
 
 User = get_user_model()
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+  role = serializers.SerializerMethodField()
+  permissions = serializers.SerializerMethodField()
   class Meta:
     model = User
-    fields = ["id", "username", "email", "first_name", "last_name", "status"]
+    fields = ["pk", "username", "email", "first_name", "last_name", "permissions", "role", "status", ]
+
+  def get_role(self, user):
+    user_role = get_user_roles(user)
+    
+    return user_role[0].get_name()
+
+  def get_permissions(self, user):
+    user_permissions = available_perm_status(user)
+
+    granted_permissions = [ perm for perm, active in user_permissions.items() if active ]
+    return granted_permissions
 
 
 class ChangeStatusSerializer(serializers.Serializer):

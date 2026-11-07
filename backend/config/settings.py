@@ -107,6 +107,11 @@ REST_FRAMEWORK = {
   ],
 }
 
+REST_AUTH = {
+  'USE_JWT': True,
+  'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer'
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
