@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from rolepermissions.roles import get_user_roles
+from rolepermissions.roles import get_user_roles, assign_role
 from rolepermissions.checkers import has_role
 from ..roles import Teacher, Student
 from ..models import CustomUser
@@ -32,6 +32,7 @@ class AuthTests(TestCase):
       email = "existing@example.com",
       password = self.password
     )
+    assign_role(self.existing_user, Student)
 
 
   def test_student_signup_successful(self):
@@ -49,7 +50,7 @@ class AuthTests(TestCase):
 
     # Verify response status code and presence of auth token
     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    self.assertIn('key', response.data)
+    self.assertIn('access', response.data)
     
     # Verify user was actually saved to the database
     self.assertTrue(User.objects.filter(username=self.username).exists())
@@ -77,7 +78,7 @@ class AuthTests(TestCase):
 
       # Verify response status code and presence of auth token
       self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-      self.assertIn('key', response.data)
+      self.assertIn('access', response.data)
       
       # Verify user was actually saved to the database
       self.assertTrue(User.objects.filter(username=self.username).exists())
@@ -117,7 +118,7 @@ class AuthTests(TestCase):
     response = self.client.post(self.login_url, data, format='json')
 
     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    self.assertIn('key', response.data)
+    self.assertIn('access', response.data)
 
 
   def test_login_fails_with_invalid_credentials(self):
@@ -130,5 +131,5 @@ class AuthTests(TestCase):
      response = self.client.post(self.login_url, data, format='json')
 
      self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-     self.assertNotIn('key', response.data)
+     self.assertNotIn('access', response.data)
      self.assertIn('non_field_errors', response.data)
