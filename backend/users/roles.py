@@ -12,6 +12,7 @@ def createAvailablePermissions(permissionMatrix):
   return availablePermissions
 
 class Admin(AbstractUserRole):
+  role_name = 'admin'
   permission_matrix = {
     Model.USER : [*CRUD_ACTIONS, ModelAction.MANAGE],
     Model.COURSE : [*CRUD_ACTIONS],
@@ -20,6 +21,7 @@ class Admin(AbstractUserRole):
   available_permissions = createAvailablePermissions(permission_matrix)
 
 class Teacher(AbstractUserRole):
+  role_name = 'teacher'
   permission_matrix = {
     Model.USER : [ModelAction.READ],
     Model.COURSE : [*CRUD_ACTIONS],
@@ -28,6 +30,7 @@ class Teacher(AbstractUserRole):
   available_permissions = createAvailablePermissions(permission_matrix)
 
 class Student(AbstractUserRole):
+  role_name = 'student'
   permission_matrix = {
     Model.USER : [],
     Model.COURSE : [ModelAction.READ, ModelAction.ENROLL, ModelAction.UNENROLL],
