@@ -1,0 +1,36 @@
+import apiClient, { logResponse } from "./apiClient";
+
+const prefix = '/api/courses'
+
+export const authApi = {
+  getAllCourses: async () => {
+    const response = await apiClient.get(prefix)
+    logResponse(response)
+
+    return response.data
+  },
+
+  editCourse: async (newCourse) => {
+    const response = await apiClient.put(
+      `${prefix}/${newCourse.id}`,
+      newCourse
+    )
+    logResponse(response)
+
+    return response.data
+  },
+
+  enrollInCourse: async (courseId) => {
+    const response = await apiClient.post(`${prefix}/${courseId}/enroll`)
+    logResponse(response)
+
+    return response.data
+  },
+
+  unEnrollInCourse: async (courseId) => {
+    const response = await apiClient.delete(`${prefix}/${courseId}/unenroll`)
+    logResponse(response)
+
+    return response.data
+  }
+}
