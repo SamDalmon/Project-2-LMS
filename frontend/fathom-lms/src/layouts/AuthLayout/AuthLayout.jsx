@@ -5,20 +5,22 @@ import AuthForm from '@/components/AuthForm'
 import SignUpForm from '@/components/SignupForm'
 import { useState } from 'react'
 
-export default function AuthLayout ({title, leftLink, rightLink, isSignUp, onSubmit}) {
-  const [ authFields, setAuthFields ] = useState({ 
-  username: '', password: '' 
-})
-  const [ signUpFields, setSignUpFields ] = useState({ 
-    email: '', firstName: '', lastName: '' 
-  })
+export default function AuthLayout ({ 
+  title, leftLink, rightLink, 
+  authFields, setAuthFields, 
+  signUpFields=null, setSignUpFields=null, 
+  onSubmit 
+}) {
 
-  const [ formErrors, setFormErrors ] = useState({ 
-    username: false, password: false,
-    email: false, firstName: false, lastName: false
-  })
+  const allFields = {...authFields, ...signUpFields}
 
-  const allFields = {...authFields, ...(isSignUp && signUpFields)}
+  const [ formErrors, setFormErrors ] = useState(
+    /*Creates an object with keys for all the fields being 
+      used, and assigns 'false' to all of them */
+    Object.fromEntries(
+      Object.keys(allFields).map(key => [key, false])
+    )
+  )
 
   const handleSubmit = (e) => {
     if( validateForm() ){
@@ -53,12 +55,12 @@ export default function AuthLayout ({title, leftLink, rightLink, isSignUp, onSub
         <Stack spacing={1} direction='column'>
           <AuthForm 
             authFields={ authFields } setAuthFields={ setAuthFields }
-            formErrors= { formErrors } setFormErrors={ setFormErrors }
+            formErrors={ formErrors } setFormErrors={ setFormErrors }
           />
-          { isSignUp && 
+          { signUpFields && 
             <SignUpForm 
               signUpFields={ signUpFields } setSignUpFields={ setSignUpFields }
-              formErrors= { formErrors } setFormErrors={ setFormErrors }
+              formErrors={ formErrors } setFormErrors={ setFormErrors }
             />
           }
           <Button
