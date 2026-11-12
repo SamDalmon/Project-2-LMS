@@ -6,7 +6,7 @@ export function AuthProvider ({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
   
-  const login = async (username, password) => {
+  const login = async ({username, password}) => {
     try {
       const response = await authApi.signIn(username, password)
 
@@ -26,7 +26,10 @@ export function AuthProvider ({ children }) {
     };
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const response = await authApi.signOut();
+    console.log(response.json)
+
     localStorage.removeItem('token');
     setToken(null);
     setUser(null);
