@@ -9,13 +9,12 @@ export function AuthProvider ({ children }) {
   const login = async ({username, password}) => {
     try {
       const response = await authApi.signIn(username, password)
+      const { access, user } = response;
 
-      const { accessToken, userData } = response.data;
+      localStorage.setItem('token', access);
 
-      localStorage.setItem('token', accessToken);
-
-      setToken(accessToken);
-      setUser(userData);
+      setToken(access);
+      setUser(user);
       return { success: true };
     
     } catch (error) {
