@@ -2,12 +2,12 @@ import apiClient, { logResponse } from "./apiClient";
 
 const prefix = '/api/courses'
 
-export const authApi = {
-  getAllCourses: async () => {
-    const response = await apiClient.get(prefix);
+export const coursesApi = {
+  getAllCourses: async (signal) => {
+    const response = await apiClient.get(prefix, { signal });
     logResponse(response);
 
-    return response.data;
+    return response;
   },
 
   addCourse: async (newCourse) => {
