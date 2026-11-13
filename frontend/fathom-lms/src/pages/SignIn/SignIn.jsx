@@ -10,8 +10,8 @@ export default function SignIn () {
   const { setSignedIn }  = useOutletContext()
   const [authFields, setAuthFields] = useState({ username: '', password:'' })
 
-  const onSubmit = () => {
-    const {success, error} = login(authFields)
+  const onSubmit = async () => {
+    const {success, error} = await login(authFields)
     if ( success ) {
       setSignedIn(true)
       console.log('Sign in successful')
