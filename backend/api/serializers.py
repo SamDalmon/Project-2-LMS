@@ -5,7 +5,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
   is_enrolled = serializers.BooleanField(read_only=True)
   class Meta:
     model = Course
-    fields = ["id", "name", "description", "is_enrolled"]
+    fields = ["id", "title", "description", "is_enrolled"]
 
 class CourseEnrollmentSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
