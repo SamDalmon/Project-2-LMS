@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 
 class Course(models.Model):
-  name = models.CharField(max_length=64, unique=True)
+  title = models.CharField(max_length=64, unique=True)
   description = models.CharField(max_length=512)
 
 # For the links showing users are enrolled in a course 
