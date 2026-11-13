@@ -2,7 +2,7 @@ import apiClient, { logResponse } from "./apiClient";
 
 const prefix = '/users';
 
-export const authApi = {
+export const usersApi = {
   getAllUsers: async () => {
     const response = await apiClient.get(prefix);
     logResponse(response);
