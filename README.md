@@ -92,6 +92,11 @@ Local Host: ```http://127.0.0.1:8000/```
     
 ```
 
+# Available Backend Commands
+
+**To Run Commands** - ```python manage.py {command_name}```
+* **seed_users** - seeds the data base with a user from each role
+
 # Api Endpoints
 /api/   rest_framework.routers.APIRootView      api:api-root
 /api/<drf_format_suffix:format> rest_framework.routers.APIRootView      api:api-root
