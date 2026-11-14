@@ -4,12 +4,12 @@ import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button } from '@mui/material';
 
 export default function UserCard ({ 
-  user: { firstName, lastName, email, role, status } 
+  user: { first_name, last_name, email, role, status } 
 }){
   const [userStatus, setUserStatus] = useState(status)
 
   const userInfo = { 
-    name: `${firstName} ${lastName}`,
+    name: `${first_name} ${last_name}`,
     email,
     role
   }
@@ -17,13 +17,13 @@ export default function UserCard ({
   let iconColor = undefined
 
   switch ( userStatus ) {
-    case 'active': 
+    case 'ACTIVE': 
       iconColor = '#59ff59';
       break;
-    case 'pending': 
+    case 'PENDING': 
       iconColor = '#f7e300';
       break;
-    case 'rejected': 
+    case 'REJECTED': 
       iconColor = '#ff1c1c';
       break;
   }
@@ -48,7 +48,7 @@ export default function UserCard ({
           ))  
         }
       </dl>
-      { userStatus === 'pending' && (
+      { userStatus === 'PENDING' && (
         <Stack className='button-container' spacing={0.5} direction='column'>
           <Button 
             id='approve-button'
