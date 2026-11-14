@@ -1,6 +1,6 @@
 import apiClient, { logResponse } from "./apiClient";  
 
-const prefix = '/users';
+const prefix = '/api/users';
 
 export const usersApi = {
   getAllUsers: async () => {
