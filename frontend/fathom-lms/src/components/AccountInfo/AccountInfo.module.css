@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.accountContainer:hover {
+  background-color: var(--header-background-color);
+  filter: brightness(0.90);
+}
+
 .accountIcon {
   color: var(--dark-text);
   margin: 5px;
