@@ -6,6 +6,7 @@ import CourseAdd from '../../components/CourseTiles/CourseAdd/CourseAdd';
 import DualSwitch from '../../components/DualSwitch';
 import { useAuth } from '../../context/AuthContext';
 import { coursesApi } from '../../api/coursesApi';
+import { isRequestCanceled } from '../../api/apiClient';
 
 export default function Courses () {
   const { user } = useAuth()
@@ -19,12 +20,6 @@ export default function Courses () {
 
   const PLACEHOLDER_ID = -1;
 
-  /*const coursesData = [
-    { id: 1, title: 'Amazing Course 1', description: 'This is the first amazing course' },
-    { id: 2, title: 'Amazing Course 2', description: 'This is the second amazing course' },
-    { id: 3, title: 'Amazing Course 3', description: 'This is the third amazing course' },
-  ]*/
-
   useEffect(() => {
     const controller = new AbortController()
 
@@ -37,7 +32,7 @@ export default function Courses () {
         setCourses(data)
 
       } catch (err) {
-        if (!coursesApi.isRequestCanceled(err)) {
+        if (!isRequestCanceled(err)) {
           setError(err.message)
         }
       } finally {
