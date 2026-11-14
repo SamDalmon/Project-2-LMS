@@ -25,6 +25,42 @@ export function AuthProvider ({ children }) {
     };
   };
 
+  const teacherSignUp = async (signUpFields) => {
+    try {
+      const response = await authApi.teacherSignUp(signUpFields);
+      const { access, user } = response;
+
+      localStorage.setItem('token', access);
+
+      setToken(access);
+      setUser(user);
+      return { success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message
+      }
+    };
+  };
+
+  const studentSignUp = async (signUpFields) => {
+    try {
+      const response = await authApi.studentSignUp(signUpFields);
+      const { access, user } = response;
+
+      localStorage.setItem('token', access);
+
+      setToken(access);
+      setUser(user);
+      return { success: true };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message
+      }
+    };
+  };
+
   const logout = async () => {
     const response = await authApi.signOut();
     console.log(response.json)
@@ -35,7 +71,7 @@ export function AuthProvider ({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, isAuthenticated: !!(token && user) }}>
+    <AuthContext.Provider value={{ user, token, login, teacherSignUp, studentSignUp, logout, isAuthenticated: !!(token && user) }}>
       {children}
     </AuthContext.Provider>
   )
