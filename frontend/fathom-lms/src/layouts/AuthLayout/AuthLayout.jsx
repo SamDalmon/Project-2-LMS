@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import AuthForm from '@/components/AuthForm'
 import SignUpForm from '@/components/SignupForm'
-import { useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 export default function AuthLayout ({ 
   title, leftLink, rightLink, 
@@ -22,13 +22,7 @@ export default function AuthLayout ({
     )
   )
 
-  const handleSubmit = (e) => {
-    if( validateForm() ){
-      onSubmit(e)
-    }
-  }
-
-  const validateForm = () => {
+  const validateForm = useCallback (() => {
     var isValid = true
     const currentErrors = {}
 
@@ -42,7 +36,28 @@ export default function AuthLayout ({
     setFormErrors(currentErrors)
 
     return isValid
-  }
+  }, [allFields])
+
+  const handleSubmit = useCallback(() => {
+    if( validateForm() ){
+      onSubmit()
+    }
+  }, [validateForm, onSubmit])
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        handleSubmit()
+      }
+    }
+
+    window.addEventListener('keydown', handleGlobalKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown)
+    }
+  }, [handleSubmit])
 
   return (
     <div className="auth-layout">
