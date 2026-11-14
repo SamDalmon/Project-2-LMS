@@ -1,4 +1,5 @@
 import apiClient, { logResponse } from "./apiClient";
+import axios from "axios";
 
 const prefix = '/api/courses'
 
@@ -7,7 +8,7 @@ export const coursesApi = {
     const response = await apiClient.get(prefix, { signal });
     logResponse(response);
 
-    return response;
+    return response.data;
   },
 
   addCourse: async (newCourse) => {
@@ -39,5 +40,9 @@ export const coursesApi = {
     logResponse(response);
 
     return response.data;
+  },
+
+  isRequestCanceled: (error) => {
+    return axios.isCancel(error)
   }
 }
