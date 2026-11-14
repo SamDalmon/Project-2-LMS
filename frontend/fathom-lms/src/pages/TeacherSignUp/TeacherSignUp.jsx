@@ -9,7 +9,7 @@ export default function TeacherSignUp () {
     username: '', password: '' 
   })
   const [ signUpFields, setSignUpFields ] = useState({ 
-    email: '', firstName: '', lastName: '' 
+    email: '', first_name: '', last_name: '' 
   })
 
   return (
