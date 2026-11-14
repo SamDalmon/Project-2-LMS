@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import AuthForm from '@/components/AuthForm'
 import SignUpForm from '@/components/SignupForm'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 
 export default function AuthLayout ({ 
   title, leftLink, rightLink, 
@@ -12,7 +12,10 @@ export default function AuthLayout ({
   onSubmit 
 }) {
 
-  const allFields = {...authFields, ...signUpFields}
+  const allFields = useMemo (() => 
+    ({...authFields, ...signUpFields}),
+    [authFields, signUpFields]
+  )
 
   const [ formErrors, setFormErrors ] = useState(
     /*Creates an object with keys for all the fields being 
