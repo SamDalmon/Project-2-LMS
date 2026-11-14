@@ -21,3 +21,7 @@ export function logResponse(response){
   console.log('Status: ', response.status);
   console.log('Data: ', response.data);
 }
+
+export function isRequestCanceled(error) {
+  return axios.isCancel(error)
+}
