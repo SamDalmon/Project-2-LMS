@@ -29,26 +29,23 @@ export default function Courses () {
     const controller = new AbortController()
 
     async function fetchCourses() {
+      setLoading(true)
+      setError(null)
+
       try {
-        const response = await coursesApi.getAllCourses(controller.signal)
-
-        if (!response.ok){
-          throw new Error(`HTTP error! Status: ${response.status}`)
-        }
-
-        const data = await response.json()
+        const data = await coursesApi.getAllCourses(controller.signal)
         setCourses(data)
+
       } catch (err) {
-        if (err.name !== 'AbortError') {
+        if (!coursesApi.isRequestCanceled(err)) {
           setError(err.message)
         }
       } finally {
         setLoading(false)
-      }
+      } 
     }
-
+  
     fetchCourses()
-
 
     return () => controller.abort()
   }, [])
