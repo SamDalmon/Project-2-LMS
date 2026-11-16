@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate, useOutletContext, Link } from 'react-router-dom'
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
+import { useAuth } from '../../context/AuthContext'
 
 export default function StudentSignUp () {
   const navigate = useNavigate()
+  const { studentSignUp } = useAuth()
   const { setSignedIn }  = useOutletContext()
   const [ authFields, setAuthFields ] = useState({ 
     username: '', password: '' 
@@ -11,6 +13,18 @@ export default function StudentSignUp () {
   const [ signUpFields, setSignUpFields ] = useState({ 
     email: '', first_name: '', last_name: '' 
   })
+
+  const onSubmit = async () => {
+    const { success, error } = await studentSignUp({...authFields, ...signUpFields})
+  
+    if (success) {
+      setSignedIn(true)
+      console.log('Student sign up successful')
+      navigate('/courses')
+    } else {
+      console.log(`Student sign up failed: ${error}`)
+    }
+  }
 
   return (
     <>
@@ -22,12 +36,7 @@ export default function StudentSignUp () {
         setAuthFields={ setAuthFields }
         signUpFields={ signUpFields }
         setSignUpFields={ setSignUpFields }
-        onSubmit={ 
-          () => {
-            setSignedIn(true)
-            navigate('/courses')
-          } 
-        } //TODO: Create OnSubmit function
+        onSubmit={ onSubmit }
       />
     </>
   )
