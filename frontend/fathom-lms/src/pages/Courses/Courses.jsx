@@ -1,5 +1,5 @@
 import './Courses.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import CourseTile from '../../components/CourseTiles/CourseTile/CourseTile';
 import CourseAdd from '../../components/CourseTiles/CourseAdd/CourseAdd';
@@ -13,13 +13,19 @@ export default function Courses () {
   const role = user.role
   const canAddEdit = user.permissions.includes('course_create') && user.permissions.includes('course_update')
   const canEnroll = user.permissions.includes('course_enroll') && user.permissions.includes('course_un-enroll')
-  const [filterEnrolled, setFilterEnrolled] = useState('left')
+  const [dualSwitchAlignment, setDualSwitchAlignment] = useState('left')
   const [editingId, setEditingId] = useState()
-  const [courses, setCourses] = useState([])
+  const [allCourses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   const PLACEHOLDER_ID = -1;
+
+  const filterEnrolled = dualSwitchAlignment === 'right'
+
+  const displayCourses = useMemo(() => {
+    return filterEnrolled ? allCourses.filter((course) => course.is_enrolled) : allCourses
+  }, [allCourses, filterEnrolled])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -62,7 +68,7 @@ export default function Courses () {
     <>
       { role === 'student' &&  
         <DualSwitch 
-          alignment={ filterEnrolled } setAlignment={ setFilterEnrolled }
+          alignment={ dualSwitchAlignment } setAlignment={ setDualSwitchAlignment }
           textLeft='All Courses' colorLeft={ 'var(--primary-theme)' } 
           textRight='Enrolled Courses' colorRight={ 'var(--secondary-theme)' }
         /> 
@@ -79,7 +85,7 @@ export default function Courses () {
               )
             }
             {
-              courses.map((course) => (
+              displayCourses.map((course) => (
                 <CourseTile 
                   key={ course.id }
                   course={ course }
