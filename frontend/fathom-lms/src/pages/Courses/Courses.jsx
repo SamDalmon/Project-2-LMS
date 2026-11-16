@@ -11,7 +11,8 @@ import { isRequestCanceled } from '../../api/apiClient';
 export default function Courses () {
   const { user } = useAuth()
   const role = user.role
-  const canAddCourses = user.permissions.includes('course_create')
+  const canAddEdit = user.permissions.includes('course_create') && user.permissions.includes('course_update')
+  const canEnroll = user.permissions.includes('course_enroll') && user.permissions.includes('course_un-enroll')
   const [filterEnrolled, setFilterEnrolled] = useState('left')
   const [editingId, setEditingId] = useState()
   const [courses, setCourses] = useState([])
@@ -45,9 +46,17 @@ export default function Courses () {
     return () => controller.abort()
   }, [])
 
+  const handleCourseUpdate = ( updatedCourse ) => {
+    setCourses(( prevCourses ) => {
+      console.log(updatedCourse)
+      return prevCourses.map((course) => {
+        return course.id === updatedCourse.id ? updatedCourse : course
+      })
+    })
+  }
+
   if(loading) return <h2>Loading Courses...</h2>
   if (error) return <h2>Error: {error}</h2>
-
 
   return (
     <>
@@ -61,7 +70,7 @@ export default function Courses () {
       <MainLayout content={ 
           <div className='courses'>
             {
-              canAddCourses && (
+              canAddEdit && (
                 <CourseAdd 
                   dummyCourse={{ id: PLACEHOLDER_ID, title: '', description: '' }}
                   isEditing={ editingId === PLACEHOLDER_ID }
@@ -73,11 +82,12 @@ export default function Courses () {
               courses.map((course) => (
                 <CourseTile 
                   key={ course.id }
-                  role= { role }
                   course={ course }
-                  description={ course.description }
+                  canEdit={ canAddEdit }
+                  canEnroll = { canEnroll }
                   isEditing={ editingId === course.id }
                   setEditingId={ setEditingId }
+                  handleCourseUpdate={ handleCourseUpdate }
                 />
               ))
             }

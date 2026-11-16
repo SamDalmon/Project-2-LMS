@@ -1,20 +1,34 @@
-
-import { useState } from "react"
 import { PRIMARY_THEME, SECONDARY_THEME } from "../../../constants"
 import Button from "@mui/material/Button"
+import { coursesApi } from "../../../api/coursesApi"
 
-export default function StudentActions () {
-  const [isEnrolled, setIsEnrolled] = useState(false)
-
+export default function StudentActions ({ course, handleCourseUpdate }) {
+  
   const buttonStyles = {
     width: '30%',
     minWidth: 'max-content'
   }
 
-  const onClick = () => { setIsEnrolled(!isEnrolled) }
+  const onClick = async () => { 
+    if (course.is_enrolled) {
+      try {
+        await coursesApi.unEnrollInCourse(course.id)
+        handleCourseUpdate({ ...course, is_enrolled: false })
+      } catch {
+        console.log(`Un-enrollment in course ${course.name} failed`)
+      }
+    } else {
+      try {
+        await coursesApi.enrollInCourse(course.id)
+        handleCourseUpdate({ ...course, is_enrolled: true })
+      } catch {
+        console.log(`Un-enrollment in course ${course.name} failed`)
+      }
+    }
+  }
 
   return (<>
-    { isEnrolled ? 
+    { course.is_enrolled ? 
       <Button
         id='unenroll-button'
         variant='contained'
