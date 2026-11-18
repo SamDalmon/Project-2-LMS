@@ -28,14 +28,14 @@ export const coursesApi = {
   },
 
   enrollInCourse: async (courseId) => {
-    const response = await apiClient.post(`${prefix}/${courseId}/enroll/`);
+    const response = await apiClient.post(`${prefix}${courseId}/enroll/`);
     logResponse(response);
 
     return response.data;
   },
 
   unEnrollInCourse: async (courseId) => {
-    const response = await apiClient.delete(`${prefix}/${courseId}/unenroll/`);
+    const response = await apiClient.delete(`${prefix}${courseId}/unenroll/`);
     logResponse(response);
 
     return response.data;
