@@ -6,7 +6,7 @@ import CourseEdit from '../CourseEdit/CourseEdit'
 
 
 export default function CourseAdd ({
-  dummyCourse, isEditing, setEditingId
+  dummyCourse, isEditing, setEditingId, handleCourseAdd
 }) {
 
   const setIsEditing = (active=true) => {
@@ -20,9 +20,10 @@ export default function CourseAdd ({
           (
             <div>
               <CourseEdit 
-                course={ dummyCourse }
+                course={{ title: '', description: '' }}
                 isEditing={ isEditing }
                 setIsEditing={ setIsEditing }
+                handleCourseChange={ handleCourseAdd }
               />
             </div> 
           ) : (

@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import TeacherActions from '../TeacherActions/TeacherActions'
 
 export default function CourseEdit({ 
-  course: { title, description }, isEditing, setIsEditing 
+  course: { title, description }, isEditing, setIsEditing, handleCourseChange 
 }) {
 
   const [courseInfo, setCourseInfo] = useState({ title, description })
@@ -15,8 +15,9 @@ export default function CourseEdit({
     setIsEditing()
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (newCourse) => {
     if( validateForm() ){
+      handleCourseChange(newCourse)
       setCourseInfo({ title, description })
       setIsEditing(false)
     }
@@ -88,6 +89,7 @@ export default function CourseEdit({
           }}
         />
         <TeacherActions 
+          course={ courseInfo }
           isEditing={ isEditing } 
           setIsEditing={ handleOnEdit }
           handleSubmit={ handleSubmit }

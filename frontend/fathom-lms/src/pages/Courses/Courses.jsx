@@ -61,6 +61,10 @@ export default function Courses () {
     })
   }
 
+  const handleCourseAdd = ( newCourse ) => {
+    setCourses([...allCourses, newCourse])
+  }
+
   if(loading) return <h2>Loading Courses...</h2>
   if (error) return <h2>Error: {error}</h2>
 
@@ -81,6 +85,7 @@ export default function Courses () {
                   dummyCourse={{ id: PLACEHOLDER_ID, title: '', description: '' }}
                   isEditing={ editingId === PLACEHOLDER_ID }
                   setEditingId={ setEditingId }
+                  handleCourseAdd={ handleCourseAdd }
                 />
               )
             }

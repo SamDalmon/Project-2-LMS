@@ -1,9 +1,10 @@
 import './TeacherActions.css'
 import { PRIMARY_THEME, SECONDARY_THEME, BUTTON_GREY } from "../../../constants";
 import Button from '@mui/material/Button'
+import { coursesApi } from '../../../api/coursesApi';
 
 export default function TeacherActions({ 
-  isEditing, setIsEditing, handleSubmit, handleCancel 
+  course, isEditing, setIsEditing, handleSubmit, handleCancel 
 }) {
   const buttonStyles = {
     flex: 1,
@@ -12,6 +13,15 @@ export default function TeacherActions({
   }
 
   const onEdit = () => setIsEditing(true)
+
+  const handleSave = async () => {
+    try {
+      const savedCourse = await coursesApi.addCourse(course)
+      handleSubmit(savedCourse)
+    } catch (error) {
+      console.log(`Saving course ${course} failed for ${error}`)
+    }
+  }
 
   return (
     <>
@@ -29,7 +39,7 @@ export default function TeacherActions({
                 id='save-button'
                 variant='contained'
                 sx={{ ...buttonStyles, ...{ backgroundColor: PRIMARY_THEME } }}
-                onClick={ handleSubmit }
+                onClick={ handleSave }
               >Save</Button>
             </>
           ) : (
