@@ -1,6 +1,6 @@
 import apiClient, { logResponse } from "./apiClient";
 
-const prefix = '/api/courses'
+const prefix = '/api/courses/'
 
 export const coursesApi = {
   getAllCourses: async (signal) => {
@@ -19,7 +19,7 @@ export const coursesApi = {
 
   editCourse: async (newCourse) => {
     const response = await apiClient.put(
-      `${prefix}/${newCourse.id}`,
+      `${prefix}${newCourse.id}`,
       newCourse
     );
     logResponse(response);
