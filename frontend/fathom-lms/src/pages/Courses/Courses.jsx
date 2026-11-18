@@ -13,6 +13,7 @@ export default function Courses () {
   const role = user.role
   const canAddEdit = user.permissions.includes('course_create') && user.permissions.includes('course_update')
   const canEnroll = user.permissions.includes('course_enroll') && user.permissions.includes('course_un-enroll')
+  const userActive = user.status === 'ACTIVE'
   const [dualSwitchAlignment, setDualSwitchAlignment] = useState('left')
   const [editingId, setEditingId] = useState()
   const [allCourses, setCourses] = useState([])
@@ -80,7 +81,7 @@ export default function Courses () {
       <MainLayout content={ 
           <div className='courses'>
             {
-              canAddEdit && (
+              (canAddEdit && userActive) && (
                 <CourseAdd 
                   dummyCourse={{ id: PLACEHOLDER_ID, title: '', description: '' }}
                   isEditing={ editingId === PLACEHOLDER_ID }
@@ -96,6 +97,7 @@ export default function Courses () {
                   course={ course }
                   canEdit={ canAddEdit }
                   canEnroll = { canEnroll }
+                  userActive = { userActive }
                   isEditing={ editingId === course.id }
                   setEditingId={ setEditingId }
                   handleCourseUpdate={ handleCourseUpdate }

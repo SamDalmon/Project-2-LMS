@@ -6,7 +6,7 @@ import TeacherActions from '../TeacherActions/TeacherActions'
 import CourseEdit from '../CourseEdit/CourseEdit'
 
 export default function CourseTile({ 
-  course, canEdit, canEnroll, isEditing, setEditingId, handleCourseUpdate 
+  course, canEdit, canEnroll, userActive, isEditing, setEditingId, handleCourseUpdate 
 }){
 
   const setIsEditing = (active=true) => {
@@ -35,7 +35,7 @@ export default function CourseTile({
                 justifyContent: 'flex-end'
               }}
             >
-              { canEdit &&
+              { (canEdit && userActive) &&
                 <TeacherActions 
                   isEditing={ isEditing } 
                   setIsEditing={ setIsEditing }
@@ -43,10 +43,10 @@ export default function CourseTile({
                   handleCancel={ null }
                 />
               }
-              { canEnroll &&
+              { (canEnroll && (userActive || course.is_enrolled)) &&
                 <StudentActions 
                   course={ course }
-                  handleCourseUpdate= { handleCourseUpdate }
+                  handleCourseUpdate={ handleCourseUpdate }
                 />
               }
             </Stack>
