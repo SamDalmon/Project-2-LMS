@@ -6,6 +6,7 @@ import TeacherActions from '../TeacherActions/TeacherActions'
 import CourseEdit from '../CourseEdit/CourseEdit'
 
 export default function CourseTile({ 
+  course, canEdit, canEnroll, userActive, isEditing, setEditingId, 
   handleCourseEdit, handleEnroll, handleUnEnroll 
 }){
 
@@ -18,9 +19,10 @@ export default function CourseTile({
       <div className='course-tile'>
         { (canEdit && isEditing) ?
           <CourseEdit
-              course={ course }
+              initialCourse={ course }
               isEditing={ isEditing }
               setIsEditing={ setIsEditing }
+              handleCourseChange={ handleCourseEdit }
           /> : 
           <>
             <CourseInfo

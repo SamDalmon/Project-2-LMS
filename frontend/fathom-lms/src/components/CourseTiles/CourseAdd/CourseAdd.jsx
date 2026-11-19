@@ -20,7 +20,7 @@ export default function CourseAdd ({
           (
             <div>
               <CourseEdit 
-                course={{ title: '', description: '' }}
+                initialCourse={{ title: '', description: '' }}
                 isEditing={ isEditing }
                 setIsEditing={ setIsEditing }
                 handleCourseChange={ handleCourseAdd }

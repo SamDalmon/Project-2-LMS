@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField'
 import TeacherActions from '../TeacherActions/TeacherActions'
 
 export default function CourseEdit({ 
-  course: { title, description }, isEditing, setIsEditing, handleCourseChange 
+  initialCourse: { id, title, description }, isEditing, setIsEditing, handleCourseChange 
 }) {
 
-  const [courseInfo, setCourseInfo] = useState({ title, description })
+  const [course, setCourse] = useState({ title, description })
   
   const [formErrors, setFormErrors] = useState({ title: false, description: false })
     
@@ -15,16 +15,16 @@ export default function CourseEdit({
     setIsEditing()
   }
 
-  const handleSubmit = (newCourse) => {
+  const handleSave = () => {
     if( validateForm() ){
-      handleCourseChange(newCourse)
-      setCourseInfo({ title, description })
+      handleCourseChange({ id, ...course })
+      setCourse({ title, description })
       setIsEditing(false)
     }
   }
 
   const handleCancel = () => {
-    setCourseInfo({ title, description })
+    setCourse({ title, description })
     setIsEditing(false)
   }
   
@@ -32,7 +32,7 @@ export default function CourseEdit({
     var isValid = true
     const currentErrors = {}
 
-    for( const [field, value] of Object.entries(courseInfo)) {
+    for( const [field, value] of Object.entries(course)) {
       if( !value.trim() ){ 
         currentErrors[field] = true
         isValid = false
@@ -46,7 +46,7 @@ export default function CourseEdit({
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setCourseInfo({ ...courseInfo, [name]: value })
+    setCourse({ ...course, [name]: value })
 
     if(value.trim()){
       setFormErrors({ ...formErrors, [name]: false })
@@ -61,7 +61,7 @@ export default function CourseEdit({
           id='title-edit'
           label='Edit Title'
           variant='outlined'
-          value={ courseInfo.title }
+          value={ course.title }
           onChange={ handleChange }
           error={ formErrors.title }
           sx={{
@@ -77,7 +77,7 @@ export default function CourseEdit({
           id='description-edit'
           label='Edit Description'
           variant='outlined'
-          value={ courseInfo.description }
+          value={ course.description }
           onChange={ handleChange }
           error={ formErrors.description }
           sx={{
@@ -89,10 +89,10 @@ export default function CourseEdit({
           }}
         />
         <TeacherActions 
-          course={ courseInfo }
+          course={ course }
           isEditing={ isEditing } 
           setIsEditing={ handleOnEdit }
-          handleSubmit={ handleSubmit }
+          handleSave={ handleSave }
           handleCancel={ handleCancel }
         />
       </div>

@@ -10,7 +10,6 @@ import { isRequestCanceled } from '../../api/apiClient';
 
 export default function Courses () {
   const { user } = useAuth()
-  const role = user.role
   const canAddEdit = user.permissions.includes('course_create') && user.permissions.includes('course_update')
   const canEnroll = user.permissions.includes('course_enroll') && user.permissions.includes('course_un-enroll')
   const userActive = user.status === 'ACTIVE'
@@ -60,6 +59,24 @@ export default function Courses () {
         return course.id === updatedCourse.id ? updatedCourse : course
       })
     })
+  }
+
+  const handleCourseAdd = async ( newCourse ) => {
+    try {
+      const addedCourse = await coursesApi.addCourse(newCourse)
+      setCourses([...allCourses, addedCourse])
+    } catch (error) {
+      console.error(`Saving course ${JSON.stringify(newCourse)} failed for ${error}`)
+    }
+  }
+
+  const handleCourseEdit = async ( editedCourse ) => {
+    try {
+      const course = await coursesApi.editCourse(editedCourse)
+      handleCourseUpdate(course)
+    } catch (error) {
+      console.error(`Editing course ${JSON.stringify(editedCourse)} failed for ${error}`)
+    }
   }
 
   const handleEnroll = async ( course ) => {
@@ -114,6 +131,7 @@ export default function Courses () {
                   userActive = { userActive }
                   isEditing={ editingId === course.id }
                   setEditingId={ setEditingId }
+                  handleCourseEdit={ handleCourseEdit }
                   handleEnroll={ handleEnroll }
                   handleUnEnroll={ handleUnEnroll }
                 />
