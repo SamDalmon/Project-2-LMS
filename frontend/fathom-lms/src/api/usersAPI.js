@@ -1,6 +1,6 @@
 import apiClient, { logResponse } from "./apiClient";  
 
-const prefix = '/api/users';
+const prefix = '/api/users/';
 
 export const usersApi = {
   getAllUsers: async () => {
@@ -10,18 +10,18 @@ export const usersApi = {
     return response.data;
   },
 
-  approveUser: async (userId) => {
+  approveUser: async (user) => {
     const response = await apiClient.post(
-      `${prefix}/${userId}/approve`
+      `${prefix}${user.pk}/approve/`
     );
     logResponse(response);
 
     return response.data;
   },
 
-  rejectUser: async (userId) => {
+  rejectUser: async (user) => {
     const response = await apiClient.post(
-      `${prefix}/${userId}/reject`
+      `${prefix}${user.pk}/reject/`
     );
     logResponse(response);
 
