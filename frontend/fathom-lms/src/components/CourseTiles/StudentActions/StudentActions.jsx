@@ -1,8 +1,7 @@
 import { PRIMARY_THEME, SECONDARY_THEME } from "../../../constants"
 import Button from "@mui/material/Button"
-import { coursesApi } from "../../../api/coursesApi"
 
-export default function StudentActions ({ course, handleCourseUpdate }) {
+export default function StudentActions ({ isEnrolled, handleEnroll, handleUnEnroll }) {
   
   const buttonStyles = {
     width: '30%',
@@ -10,37 +9,27 @@ export default function StudentActions ({ course, handleCourseUpdate }) {
   }
 
   const onClick = async () => { 
-    if (course.is_enrolled) {
-      try {
-        await coursesApi.unEnrollInCourse(course.id)
-        handleCourseUpdate({ ...course, is_enrolled: false })
-      } catch {
-        console.log(`Un-enrollment in course ${course.name} failed`)
-      }
+    if (isEnrolled) {
+      handleUnEnroll()
     } else {
-      try {
-        await coursesApi.enrollInCourse(course.id)
-        handleCourseUpdate({ ...course, is_enrolled: true })
-      } catch {
-        console.log(`Un-enrollment in course ${course.name} failed`)
-      }
+      handleEnroll()
     }
   }
 
   return (<>
-    { course.is_enrolled ? 
+    { isEnrolled ? 
       <Button
         id='unenroll-button'
         variant='contained'
         sx={{ ...buttonStyles, ...{ backgroundColor: SECONDARY_THEME } }}
         onClick={ onClick }
-      > Unenroll </Button> :
+      >Unenroll</Button> :
       <Button 
         id='enroll-button'
         variant='contained'
         sx={{ ...buttonStyles, ...{ backgroundColor: PRIMARY_THEME } }}
         onClick={ onClick }
-        > Enroll</Button>
+        >Enroll</Button>
       }
   </>)
 }

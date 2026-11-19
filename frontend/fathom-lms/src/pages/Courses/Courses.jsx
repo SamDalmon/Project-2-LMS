@@ -62,8 +62,22 @@ export default function Courses () {
     })
   }
 
-  const handleCourseAdd = ( newCourse ) => {
-    setCourses([...allCourses, newCourse])
+  const handleEnroll = async ( course ) => {
+    try {
+      await coursesApi.enrollInCourse(course.id)
+      handleCourseUpdate({ ...course, is_enrolled: true })
+    } catch {
+      console.error(`Un-enrollment in course ${course.name} failed`)
+    }
+  } 
+
+  const handleUnEnroll = async ( course ) => {
+    try {
+      await coursesApi.unEnrollInCourse(course.id)
+      handleCourseUpdate({ ...course, is_enrolled: false })
+    } catch {
+      console.error(`Un-enrollment in course ${course.name} failed`)
+    }
   }
 
   if(loading) return <h2>Loading Courses...</h2>
@@ -71,7 +85,7 @@ export default function Courses () {
 
   return (
     <>
-      { role === 'student' &&  
+      { canEnroll &&  
         <DualSwitch 
           alignment={ dualSwitchAlignment } setAlignment={ setDualSwitchAlignment }
           textLeft='All Courses' colorLeft={ 'var(--primary-theme)' } 
@@ -100,7 +114,8 @@ export default function Courses () {
                   userActive = { userActive }
                   isEditing={ editingId === course.id }
                   setEditingId={ setEditingId }
-                  handleCourseUpdate={ handleCourseUpdate }
+                  handleEnroll={ handleEnroll }
+                  handleUnEnroll={ handleUnEnroll }
                 />
               ))
             }
