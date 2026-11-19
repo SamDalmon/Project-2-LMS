@@ -54,7 +54,6 @@ export default function Courses () {
 
   const handleCourseUpdate = ( updatedCourse ) => {
     setCourses(( prevCourses ) => {
-      console.log(updatedCourse)
       return prevCourses.map((course) => {
         return course.id === updatedCourse.id ? updatedCourse : course
       })
