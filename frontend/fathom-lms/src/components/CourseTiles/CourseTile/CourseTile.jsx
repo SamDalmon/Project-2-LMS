@@ -6,9 +6,9 @@ import TeacherActions from '../TeacherActions/TeacherActions'
 import CourseEdit from '../CourseEdit/CourseEdit'
 
 export default function CourseTile({ 
-  role, course, isEditing, setEditingId 
+  course, canEdit, canEnroll, userActive, isEditing, setEditingId, 
+  handleCourseEdit, handleEnroll, handleUnEnroll 
 }){
-  const canEdit = ['teacher', 'admin'].includes(role)
 
   const setIsEditing = (active=true) => {
     setEditingId( active ? course.id : null )
@@ -19,9 +19,10 @@ export default function CourseTile({
       <div className='course-tile'>
         { (canEdit && isEditing) ?
           <CourseEdit
-              course={ course }
+              initialCourse={ course }
               isEditing={ isEditing }
               setIsEditing={ setIsEditing }
+              handleCourseChange={ handleCourseEdit }
           /> : 
           <>
             <CourseInfo
@@ -36,14 +37,20 @@ export default function CourseTile({
                 justifyContent: 'flex-end'
               }}
             >
-              { canEdit ?
+              { (canEdit && userActive) &&
                 <TeacherActions 
                   isEditing={ isEditing } 
                   setIsEditing={ setIsEditing }
                   handleSubmit={ null }
                   handleCancel={ null }
-                /> :
-                <StudentActions />
+                />
+              }
+              { (canEnroll && (userActive || course.is_enrolled)) &&
+                <StudentActions 
+                  isEnrolled={ course.is_enrolled }
+                  handleEnroll={ () => handleEnroll(course) }
+                  handleUnEnroll={ () => handleUnEnroll(course) }
+                />
               }
             </Stack>
           </>

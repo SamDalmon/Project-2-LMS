@@ -3,7 +3,7 @@ import { PRIMARY_THEME, SECONDARY_THEME, BUTTON_GREY } from "../../../constants"
 import Button from '@mui/material/Button'
 
 export default function TeacherActions({ 
-  isEditing, setIsEditing, handleSubmit, handleCancel 
+  isEditing, setIsEditing, handleSave, handleCancel 
 }) {
   const buttonStyles = {
     flex: 1,
@@ -29,7 +29,7 @@ export default function TeacherActions({
                 id='save-button'
                 variant='contained'
                 sx={{ ...buttonStyles, ...{ backgroundColor: PRIMARY_THEME } }}
-                onClick={ handleSubmit }
+                onClick={ handleSave }
               >Save</Button>
             </>
           ) : (

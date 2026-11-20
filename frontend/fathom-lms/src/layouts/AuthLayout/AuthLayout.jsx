@@ -3,30 +3,29 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import AuthForm from '@/components/AuthForm'
 import SignUpForm from '@/components/SignupForm'
-import { useState } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 
-export default function AuthLayout ({title, leftLink, rightLink, isSignUp, onSubmit}) {
-  const [ authFields, setAuthFields ] = useState({ 
-  username: '', password: '' 
-})
-  const [ signUpFields, setSignUpFields ] = useState({ 
-    email: '', firstName: '', lastName: '' 
-  })
+export default function AuthLayout ({ 
+  title, leftLink, rightLink, 
+  authFields, setAuthFields, 
+  signUpFields=null, setSignUpFields=null, 
+  onSubmit 
+}) {
 
-  const [ formErrors, setFormErrors ] = useState({ 
-    username: false, password: false,
-    email: false, firstName: false, lastName: false
-  })
+  const allFields = useMemo (() => 
+    ({...authFields, ...signUpFields}),
+    [authFields, signUpFields]
+  )
 
-  const allFields = {...authFields, ...(isSignUp && signUpFields)}
+  const [ formErrors, setFormErrors ] = useState(
+    /*Creates an object with keys for all the fields being 
+      used, and assigns 'false' to all of them */
+    Object.fromEntries(
+      Object.keys(allFields).map(key => [key, false])
+    )
+  )
 
-  const handleSubmit = (e) => {
-    if( validateForm() ){
-      onSubmit(e)
-    }
-  }
-
-  const validateForm = () => {
+  const validateForm = useCallback (() => {
     var isValid = true
     const currentErrors = {}
 
@@ -40,7 +39,28 @@ export default function AuthLayout ({title, leftLink, rightLink, isSignUp, onSub
     setFormErrors(currentErrors)
 
     return isValid
-  }
+  }, [allFields])
+
+  const handleSubmit = useCallback(() => {
+    if( validateForm() ){
+      onSubmit()
+    }
+  }, [validateForm, onSubmit])
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        handleSubmit()
+      }
+    }
+
+    window.addEventListener('keydown', handleGlobalKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown)
+    }
+  }, [handleSubmit])
 
   return (
     <div className="auth-layout">
@@ -53,12 +73,12 @@ export default function AuthLayout ({title, leftLink, rightLink, isSignUp, onSub
         <Stack spacing={1} direction='column'>
           <AuthForm 
             authFields={ authFields } setAuthFields={ setAuthFields }
-            formErrors= { formErrors } setFormErrors={ setFormErrors }
+            formErrors={ formErrors } setFormErrors={ setFormErrors }
           />
-          { isSignUp && 
+          { signUpFields && 
             <SignUpForm 
               signUpFields={ signUpFields } setSignUpFields={ setSignUpFields }
-              formErrors= { formErrors } setFormErrors={ setFormErrors }
+              formErrors={ formErrors } setFormErrors={ setFormErrors }
             />
           }
           <Button

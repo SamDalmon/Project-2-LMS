@@ -1,17 +1,20 @@
-
-import { useState } from "react"
 import { PRIMARY_THEME, SECONDARY_THEME } from "../../../constants"
 import Button from "@mui/material/Button"
 
-export default function StudentActions () {
-  const [isEnrolled, setIsEnrolled] = useState(false)
-
+export default function StudentActions ({ isEnrolled, handleEnroll, handleUnEnroll }) {
+  
   const buttonStyles = {
     width: '30%',
     minWidth: 'max-content'
   }
 
-  const onClick = () => { setIsEnrolled(!isEnrolled) }
+  const onClick = async () => { 
+    if (isEnrolled) {
+      handleUnEnroll()
+    } else {
+      handleEnroll()
+    }
+  }
 
   return (<>
     { isEnrolled ? 
@@ -20,13 +23,13 @@ export default function StudentActions () {
         variant='contained'
         sx={{ ...buttonStyles, ...{ backgroundColor: SECONDARY_THEME } }}
         onClick={ onClick }
-      > Unenroll </Button> :
+      >Unenroll</Button> :
       <Button 
         id='enroll-button'
         variant='contained'
         sx={{ ...buttonStyles, ...{ backgroundColor: PRIMARY_THEME } }}
         onClick={ onClick }
-        > Enroll</Button>
+        >Enroll</Button>
       }
   </>)
 }

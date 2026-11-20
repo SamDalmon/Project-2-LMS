@@ -26,22 +26,22 @@ export default function SignUpForm ({
         error={ formErrors.email }
       />
       <TextField
-        name='firstName'
+        name='first_name'
         id='first-name'
         label='First Name *'
         variant='outlined'
-        value={ signUpFields.firstName }
+        value={ signUpFields.first_name }
         onChange={ handleChange }
-        error={ formErrors.firstName }
+        error={ formErrors.first_name }
       />
       <TextField
-        name='lastName'
+        name='last_name'
         id='last-name'
         label='Last Name *'
         variant='outlined'
-        value={ signUpFields.lastName }
+        value={ signUpFields.last_name }
         onChange={ handleChange }
-        error={ formErrors.lastName }
+        error={ formErrors.last_name }
       />
     </>
   )

@@ -1,10 +1,30 @@
-import { useNavigate, useOutletContext } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, useOutletContext, Link  } from 'react-router-dom'
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
+import { useAuth } from '../../context/AuthContext'
 
 export default function TeacherSignUp () {
   const navigate = useNavigate()
+  const { teacherSignUp } = useAuth()
   const { setSignedIn }  = useOutletContext()
+  const [ authFields, setAuthFields ] = useState({ 
+    username: '', password: '' 
+  })
+  const [ signUpFields, setSignUpFields ] = useState({ 
+    email: '', first_name: '', last_name: '' 
+  })
+
+  const onSubmit = async () => {
+    const { success, error } = await teacherSignUp({...authFields, ...signUpFields})
+    
+    if (success) {
+      setSignedIn(true)
+      console.log('Teacher sign up successful')
+      navigate('/courses') 
+    } else {
+      console.log(`Teacher sign up failed: ${error}`)
+    }
+  }
 
   return (
     <>
@@ -12,13 +32,11 @@ export default function TeacherSignUp () {
         title='Teacher Sign Up'
         leftLink={ <Link to='/sign-in'>Sign In</Link> }
         rightLink={ <Link to='/student-sign-up'>Student Sign Up</Link> }
-        isSignUp={ true }
-        onSubmit={ 
-          () => {
-            setSignedIn(true)
-            navigate('/courses') 
-          }
-        } //TODO: Create OnSubmit function
+        authFields={ authFields }
+        setAuthFields={ setAuthFields }
+        signUpFields={ signUpFields }
+        setSignUpFields={ setSignUpFields }
+        onSubmit={ onSubmit }
       />
     </>
   )

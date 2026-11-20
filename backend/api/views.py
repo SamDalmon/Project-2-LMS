@@ -21,14 +21,15 @@ from .serializers import (
 # Course Views
 class CourseListCreateView(
   mixins.ListModelMixin,
+  mixins.CreateModelMixin,
   viewsets.GenericViewSet
 ):
   queryset = Course.objects.all()
   serializer_class = CourseSerializer
-  base_permissions = [IsAuthenticated, IsActive]
+  base_permissions = [IsAuthenticated]
   
   action_permissions = {
-    'POST': CanCreateCourses,
+    'POST': [CanCreateCourses, IsActive],
   }
 
   def get_permissions(self):
@@ -36,7 +37,7 @@ class CourseListCreateView(
 
     extra_permissions = self.action_permissions.get(self.request.method)
     if extra_permissions is not None:
-      permissions.append(extra_permissions)
+      permissions += extra_permissions
     
     return [permission() for permission in permissions]
 

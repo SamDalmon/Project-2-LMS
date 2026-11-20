@@ -1,29 +1,28 @@
 import './UserCard.css'
-import React, { useState } from 'react';
+import React from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button } from '@mui/material';
 
 export default function UserCard ({ 
-  user: { firstName, lastName, email, role, status } 
+  user, handleApprove, handleReject 
 }){
-  const [userStatus, setUserStatus] = useState(status)
 
   const userInfo = { 
-    name: `${firstName} ${lastName}`,
-    email,
-    role
+    name: `${user.first_name} ${user.last_name}`,
+    email: user.email,
+    role: user.role
   }
 
   let iconColor = undefined
 
-  switch ( userStatus ) {
-    case 'active': 
+  switch ( user.status ) {
+    case 'ACTIVE': 
       iconColor = '#59ff59';
       break;
-    case 'pending': 
+    case 'PENDING': 
       iconColor = '#f7e300';
       break;
-    case 'rejected': 
+    case 'REJECTED': 
       iconColor = '#ff1c1c';
       break;
   }
@@ -48,17 +47,17 @@ export default function UserCard ({
           ))  
         }
       </dl>
-      { userStatus === 'pending' && (
+      { user.status === 'PENDING' && (
         <Stack className='button-container' spacing={0.5} direction='column'>
           <Button 
             id='approve-button'
-            onClick={ () => setUserStatus('active') }
+            onClick={ () => handleApprove(user) }
             variant='contained'
             sx={{ backgroundColor: 'var(--primary-theme)' }}
           > Approve </Button>
           <Button 
             id='reject-button'
-            onClick={ () => setUserStatus('rejected') }
+            onClick={ () => handleReject(user) }
             variant='contained'
             sx={{ backgroundColor: 'var(--secondary-theme)' }}
           > Reject </Button>

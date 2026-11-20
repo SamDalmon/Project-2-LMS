@@ -3,33 +3,40 @@ import React, { useState } from 'react'
 import { AccountCircle } from "@mui/icons-material"
 import { useNavigate } from 'react-router-dom'
 import  { Menu, MenuItem } from '@mui/material'
+import { useAuth } from '../../context/AuthContext'
 
-export default function AccountInfo({ user, setSignedIn }){
+export default function AccountInfo({ setSignedIn }){
   const navigate = useNavigate()
+  const { user, logout } = useAuth()
 
   const id = React.useId()
   const buttonId = `${id}-button`
   const menuId = `${id}-menu`
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
+  
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleSignOut = () => {
+    logout()
+    handleClose()
+    setSignedIn(false)
+    navigate('/sign-in')
   }
 
   const buttons = [
     {
       text:'Sign Out', 
-      onClick: () => {
-        handleClose()
-        setSignedIn(false)
-        navigate('/sign-in')
-      }
+      onClick: handleSignOut
     }
   ]
-  if (user.role === 'admin'){
+  if (user.permissions.includes('user_manage')){
     buttons.unshift({
       text: 'User Management', onClick: () => {
         handleClose()
@@ -47,7 +54,7 @@ export default function AccountInfo({ user, setSignedIn }){
       >
         <div className={ styles.verticalLine }></div>
         <div className={ styles.userInfoContainer }>
-          <span className={ styles.username }>{ `${user.firstName} ${user.lastName}` }</span> 
+          <span className={ styles.username }>{ `${user.first_name} ${user.last_name}` }</span> 
           <span className={ styles.role }>{ user.role }</span>
         </div>
         <AccountCircle 
