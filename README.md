@@ -15,7 +15,20 @@ To provide a secure system
 * **Authentication**: dj-rest-auth
 * **User Roles**: django-role-permissions
 
-**Database**: SQLite   
+**Database**: SQLite  
+
+# Project Setup
+
+## Backend
+run in ```/backend```
+1. ```python3 -m venv main-venv && main-venv/bin/pip```
+2. ```pip install -r requirements.txt```
+3. ```source main-venv/bin/activate```
+4. ```python manage.py migrate```
+
+## Frontend
+run in ```/fathom-lms```
+1. npm install
 
 # How to start
 
@@ -23,8 +36,10 @@ To provide a secure system
 Run Local: ```npm run dev```
 Local Host: ```http://localhost:5173/```
 
-**Backend**: 
-Activate venv ```main-venv/Scripts/Activate.ps1```
+**Backend** (run from `backend/`): 
+Create venv (first time) ```python3 -m venv main-venv && main-venv/bin/pip install -r requirements.txt```
+Activate venv (macOS) ```source main-venv/bin/activate``` — or (Windows) ```main-venv/Scripts/Activate.ps1```
+VS Code activates it automatically in new terminals (see `.vscode/settings.json`).
 Run Local ```python manage.py runserver```
 Local Host: ```http://127.0.0.1:8000/```
 
