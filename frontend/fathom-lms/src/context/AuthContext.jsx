@@ -1,18 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AuthContext } from './AuthContext';
 import { authApi } from '../api/authApi';
+import { isRequestCanceled } from '../api/apiClient';
 
 export function AuthProvider ({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
   const logout = useCallback(async () => {
     const response = await authApi.signOut();
     console.log(`Logout: ${response.json}`);
 
-    localStorage.removeItem('token');
-    setToken(null);
     setUser(null);
   }, [])
 
@@ -23,14 +21,6 @@ export function AuthProvider ({ children }) {
     async function fetchUser() {
       setLoading(true);
 
-      if(!token){ 
-        setToken(null);
-        setUser(null);
-        setLoading(false);
-        
-        return;
-      }
-
       try { 
         const data = await authApi.getCurrentUser(controller.signal);
         
@@ -38,10 +28,8 @@ export function AuthProvider ({ children }) {
           setUser(data);
         };
       } catch (error) {
-        if (active && error.name !== 'CanceledError'){
+        if (active && isRequestCanceled(error)){
           console.log(`Getting user info failed due to ${error.name}: ${error}`);
-          localStorage.removeItem('token');
-          setToken(null);
           setUser(null);
         };
       } finally {
@@ -56,16 +44,13 @@ export function AuthProvider ({ children }) {
       active = false;
       controller.abort();
     }
-  }, [token, logout]);
+  }, [logout]);
   
   const login = async ({username, password}) => {
     try {
       const response = await authApi.signIn(username, password);
-      const { access, user } = response;
+      const { user } = response;
 
-      localStorage.setItem('token', access);
-
-      setToken(access);
       setUser(user);
       return { success: true };
     
@@ -80,11 +65,8 @@ export function AuthProvider ({ children }) {
   const teacherSignUp = async (signUpFields) => {
     try {
       const response = await authApi.teacherSignUp(signUpFields);
-      const { access, user } = response;
+      const { user } = response;
 
-      localStorage.setItem('token', access);
-
-      setToken(access);
       setUser(user);
       return { success: true };
     } catch (error) {
@@ -98,11 +80,8 @@ export function AuthProvider ({ children }) {
   const studentSignUp = async (signUpFields) => {
     try {
       const response = await authApi.studentSignUp(signUpFields);
-      const { access, user } = response;
+      const { user } = response;
 
-      localStorage.setItem('token', access);
-
-      setToken(access);
       setUser(user);
       return { success: true };
     } catch (error) {
@@ -114,7 +93,7 @@ export function AuthProvider ({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, teacherSignUp, studentSignUp, logout, isAuthenticated: !!token }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, teacherSignUp, studentSignUp, logout }}>
       { !loading ? children : <h2>Loading User Info...</h2> }
     </AuthContext.Provider>
   )
