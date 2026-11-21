@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { useNavigate, useOutletContext, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
 import { useAuth } from '../../context/AuthContext'
 
 export default function StudentSignUp () {
   const navigate = useNavigate()
   const { studentSignUp } = useAuth()
-  const { setSignedIn }  = useOutletContext()
   const [ authFields, setAuthFields ] = useState({ 
     username: '', password: '' 
   })
@@ -18,7 +17,6 @@ export default function StudentSignUp () {
     const { success, error } = await studentSignUp({...authFields, ...signUpFields})
   
     if (success) {
-      setSignedIn(true)
       console.log('Student sign up successful')
       navigate('/courses')
     } else {
