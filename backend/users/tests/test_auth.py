@@ -1,6 +1,7 @@
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -34,6 +35,17 @@ class AuthTests(TestCase):
     )
     assign_role(self.existing_user, Student)
 
+  def assert_signup_tokens_are_cookies(self, response):
+    self.assertNotIn('access', response.data)
+    self.assertNotIn('refresh', response.data)
+    for cookie_name in (
+      settings.REST_AUTH['JWT_AUTH_COOKIE'],
+      settings.REST_AUTH['JWT_AUTH_REFRESH_COOKIE'],
+    ):
+      self.assertIn(cookie_name, response.cookies)
+      self.assertTrue(response.cookies[cookie_name].value)
+      self.assertTrue(response.cookies[cookie_name]['httponly'])
+
 
   def test_student_signup_successful(self):
     """Ensure a student can successfully register via the signup endpoint."""
@@ -48,9 +60,9 @@ class AuthTests(TestCase):
 
     response = self.client.post(self.student_signup_url, data, format='json')
 
-    # Verify response status code and presence of auth token
+    # Verify the tokens are delivered through cookies, not the response body.
     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    self.assertIn('access', response.data)
+    self.assert_signup_tokens_are_cookies(response)
     
     # Verify user was actually saved to the database
     self.assertTrue(User.objects.filter(username=self.username).exists())
@@ -76,9 +88,9 @@ class AuthTests(TestCase):
 
       response = self.client.post(self.teacher_signup_url, data, format='json')
 
-      # Verify response status code and presence of auth token
+      # Verify the tokens are delivered through cookies, not the response body.
       self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-      self.assertIn('access', response.data)
+      self.assert_signup_tokens_are_cookies(response)
       
       # Verify user was actually saved to the database
       self.assertTrue(User.objects.filter(username=self.username).exists())
