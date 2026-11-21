@@ -28,10 +28,12 @@ export function AuthProvider ({ children }) {
           setUser(data);
         };
       } catch (error) {
-        if (active && isRequestCanceled(error)){
-          console.log(`Getting user info failed due to ${error.name}: ${error}`);
+        if (active) {
           setUser(null);
-        };
+          if (!isRequestCanceled(error) && error.response?.status !== 401) {
+            console.error('Getting user info failed:', error);
+          }
+        }
       } finally {
         if (active) {
           setLoading(false);
