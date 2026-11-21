@@ -10,6 +10,7 @@ from rolepermissions.checkers import get_user_roles
 from django.contrib.auth import get_user_model
 from .permissions import CanManageUsers, IsActive
 from .serializers import UserSerializer, RegisterSerializer
+from dj_rest_auth.jwt_auth import set_jwt_cookies
 from .forms import CustomUserCreationForm
 from .roles import Teacher, Student
 from .constants import ModelAction, CRUD_ACTIONS, Role, Model
@@ -123,7 +124,14 @@ class RoleRegisterView(RegisterView):
 
     response_data['user_id'] = user.id
 
-    return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
+    access_token = response_data.pop('access', None)
+    refresh_token = response_data.pop('refresh', None)
+
+    response = Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
+    if access_token is not None and refresh_token is not None:
+      set_jwt_cookies(response, access_token, refresh_token)
+
+    return response
 
 class TeacherRegisterView(RoleRegisterView):
   role = Teacher
