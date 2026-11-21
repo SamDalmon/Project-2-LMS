@@ -1,13 +1,15 @@
 import styles from './AccountInfo.module.css'
 import React, { useState } from 'react'
 import { AccountCircle } from "@mui/icons-material"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useMatch } from 'react-router-dom'
 import  { Menu, MenuItem } from '@mui/material'
 import { useAuth } from '../../context/AuthContext'
 
 export default function AccountInfo(){
   const navigate = useNavigate()
   const { user, logout } = useAuth()
+  const showCoursesButton = !useMatch('/courses/')
+  const showUserManagementButton = !useMatch('/user-management/')
 
   const id = React.useId()
   const buttonId = `${id}-button`
@@ -35,7 +37,17 @@ export default function AccountInfo(){
       onClick: handleSignOut
     }
   ]
-  if (user.permissions.includes('user_manage')){
+  if (showCoursesButton){
+    buttons.unshift({
+      key: 3,
+      text: 'Courses',
+      onClick: () => {
+        handleClose()
+        navigate('/courses')
+      }
+    })
+  }
+  if (user.permissions.includes('user_manage') && showUserManagementButton){
     buttons.unshift({
       key: 2,
       text: 'User Management', 
