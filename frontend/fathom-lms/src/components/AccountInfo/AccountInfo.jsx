@@ -30,13 +30,16 @@ export default function AccountInfo(){
 
   const buttons = [
     {
+      key: 1,
       text:'Sign Out', 
       onClick: handleSignOut
     }
   ]
   if (user.permissions.includes('user_manage')){
     buttons.unshift({
-      text: 'User Management', onClick: () => {
+      key: 2,
+      text: 'User Management', 
+      onClick: () => {
         handleClose()
         navigate('/user-management')
       }
@@ -101,8 +104,8 @@ export default function AccountInfo(){
         }}
       >
         {
-          buttons.map(({text, onClick}) => (
-            <MenuItem onClick={ onClick }>{ text }</MenuItem>
+          buttons.map(({key, text, onClick}) => (
+            <MenuItem key={ key } onClick={ onClick }>{ text }</MenuItem>
           ))
         }
       </Menu>
