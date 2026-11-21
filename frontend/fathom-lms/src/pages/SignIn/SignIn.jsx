@@ -1,4 +1,4 @@
-import { useNavigate, useOutletContext }  from 'react-router-dom'
+import { useNavigate }  from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
@@ -7,13 +7,11 @@ import { useAuth } from '../../context/AuthContext'
 export default function SignIn () {
   const navigate = useNavigate()
   const { login } = useAuth()
-  const { setSignedIn }  = useOutletContext()
   const [authFields, setAuthFields] = useState({ username: '', password:'' })
 
   const onSubmit = async () => {
     const {success, error} = await login(authFields)
     if ( success ) {
-      setSignedIn(true)
       console.log('Sign in successful')
       navigate('/courses')
     } else {

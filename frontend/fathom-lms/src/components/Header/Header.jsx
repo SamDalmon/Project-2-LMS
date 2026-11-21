@@ -3,8 +3,10 @@ import logo from '../../assets/logo.png'
 import "./Header.css"
 import AccountInfo from '../AccountInfo/AccountInfo'
 import { Link, useMatch } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
-export default function Header ({ user, signedIn, setSignedIn }) {
+export default function Header () {
+  const { user } = useAuth();
   const isUserManagement = useMatch('/user-management/')
 
   return (
@@ -21,8 +23,8 @@ export default function Header ({ user, signedIn, setSignedIn }) {
             {'< Back to Course Catalog'}
           </Link>
         }
-        { signedIn &&
-          <AccountInfo user={ user } setSignedIn={ setSignedIn }/>
+        { user &&
+          <AccountInfo />
         }
       </div>
     </>

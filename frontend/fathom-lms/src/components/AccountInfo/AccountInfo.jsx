@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import  { Menu, MenuItem } from '@mui/material'
 import { useAuth } from '../../context/AuthContext'
 
-export default function AccountInfo({ setSignedIn }){
+export default function AccountInfo(){
   const navigate = useNavigate()
   const { user, logout } = useAuth()
 
@@ -26,8 +26,6 @@ export default function AccountInfo({ setSignedIn }){
   const handleSignOut = () => {
     logout()
     handleClose()
-    setSignedIn(false)
-    navigate('/sign-in')
   }
 
   const buttons = [
