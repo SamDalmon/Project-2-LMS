@@ -5,5 +5,5 @@ import { AuthContext } from '../context/AuthContext.js'
 export default function ProtectedRoute () {
   const { token } = useContext(AuthContext)
 
-  return token ? <Outlet /> : <Navigate to="/login" replace />
+  return token ? <Outlet /> : <Navigate to="/sign-in" replace />
 }
