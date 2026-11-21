@@ -28,9 +28,17 @@ export const authApi = {
   },
 
   teacherSignUp: async (signUpFields) => {
-    const data = {...signUpFields, password1: signUpFields.password, password2: signUpFields.password};    const response = await apiClient.post(`${prefix}/registration/teacher`, data);
+    const data = {...signUpFields, password1: signUpFields.password, password2: signUpFields.password};    
+    const response = await apiClient.post(`${prefix}/registration/teacher`, data);
     logResponse(response);
 
     return response.data;
   },
+
+  getCurrentUser: async (signal) => { 
+    const response = await apiClient.get(`${prefix}/user`, { signal });
+    logResponse(response);
+
+    return response.data;
+  }
 }
