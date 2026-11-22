@@ -32,13 +32,22 @@ SEED_USERS = [
     "status": ACTIVE,
   },
   {
-    "username": "teacher2",
-    "email": "teacher2@teacher.com",
-    "password": "teacher2",
+    "username": "pteacher",
+    "email": "teacher@teacher.com",
+    "password": "teacher",
     "first_name": "Amanda",
     "last_name": "Kening",
     "role": Teacher,
     "status": PENDING,
+  },
+  {
+    "username": "rteacher",
+    "email": "teacher@teacher.com",
+    "password": "teacher",
+    "first_name": "Joeane",
+    "last_name": "Plumbob",
+    "role": Teacher,
+    "status": REJECTED,
   },
   {
     "username": "student",
@@ -61,8 +70,8 @@ class Command(BaseCommand):
     with transaction.atomic():
       for data in SEED_USERS:
 
-        if User.objects.filter(email=data["email"]).exists():
-          self.stdout.write(self.style.WARNING(f"User with email {data["email"]} already exists. -- Skipped"))
+        if User.objects.filter(username=data["username"]).exists():
+          self.stdout.write(self.style.WARNING(f"User with username {data["username"]} already exists. -- Skipped"))
           continue
 
         user = User.objects.create_user(
