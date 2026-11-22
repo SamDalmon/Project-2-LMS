@@ -28,7 +28,7 @@ run in ```/backend```
 
 ## Frontend
 run in ```/fathom-lms```
-1. npm install
+1. ```npm install```
 
 # How to start
 
@@ -38,7 +38,9 @@ Local Host: ```http://localhost:5173/```
 
 **Backend** (run from `backend/`): 
 Create venv (first time) ```python3 -m venv main-venv && main-venv/bin/pip install -r requirements.txt```
-Activate venv (macOS) ```source main-venv/bin/activate``` — or (Windows) ```main-venv/Scripts/Activate.ps1```
+Activate venv 
+- (macOS) ```source main-venv/bin/activate``` 
+- or (Windows) ```main-venv/Scripts/Activate.ps1```
 VS Code activates it automatically in new terminals (see `.vscode/settings.json`).
 Run Local ```python manage.py runserver```
 Local Host: ```http://127.0.0.1:8000/```
@@ -109,8 +111,10 @@ Local Host: ```http://127.0.0.1:8000/```
 
 # Available Backend Commands
 
-**To Run Commands** - ```python manage.py {command_name}```
-* **seed_users** - seeds the data base with a user from each role
+**To Run Commands** - From inside of main-venv: ```python manage.py {command_name}```
+* **seed_users** - seeds the data base with a user from each role and status
+* **seed_pending_teachers {num}** - Seeds a specified number of pending teachers
+* **seed_courses** - seeds a list of demo courses
 
 # Api Endpoints
 /api/   rest_framework.routers.APIRootView      api:api-root
