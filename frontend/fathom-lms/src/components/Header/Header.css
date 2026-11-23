@@ -22,6 +22,26 @@ img {
   align-items: center;
 }
 
+.account-info-container{
+  display: flex;
+  margin-left: 20px;
+  gap: 4px;
+}
+
+.pending-status-warning {
+  height: calc(var(--header-height) - 10px);
+  width: 250px;
+  box-sizing: border-box;
+  display: flex;
+  background-color: rgba(255, 0, 0, 0.5);
+  padding: 3px 5px;
+  margin: 5px 0px;
+  text-align: left;
+  border-radius: var(--radius-sm);
+  align-self: flex-end;
+  align-items: center;
+}
+
 .back-link {
   position: absolute;
   margin-top: var(--header-height);

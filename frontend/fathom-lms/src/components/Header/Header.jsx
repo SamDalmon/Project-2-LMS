@@ -23,9 +23,20 @@ export default function Header () {
             {'< Back to Course Catalog'}
           </Link>
         }
-        { user &&
-          <AccountInfo />
-        }
+        <div className='account-info-container'>
+          { user && user.status === 'PENDING' &&
+            <div className= 'pending-status-warning'>
+              <p>
+                Your account has not been activated yet. 
+                Your available actions are limited.
+              </p>
+            
+            </div>
+          }
+          { user &&
+            <AccountInfo />
+          }
+        </div>
       </div>
     </>
   )
