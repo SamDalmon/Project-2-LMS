@@ -118,6 +118,7 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH = {
+  'LOGIN_SERIALIZER': 'users.serializers.GatedLoginSerializer',
   'USE_JWT': True,
   'JWT_AUTH_COOKIE': 'my-app-auth',
   'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',

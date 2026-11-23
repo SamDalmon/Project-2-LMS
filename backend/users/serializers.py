@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from dj_rest_auth.serializers import LoginSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from .roles import Teacher, Student
 from .models import CustomUser
@@ -10,6 +11,19 @@ from django.db import transaction
 
 User = get_user_model()
 
+class GatedLoginSerializer(LoginSerializer):
+  def validate(self, attrs):
+    attrs = super().validate(attrs)
+    user = attrs["user"]
+
+    if getattr(user, "status", None) == CustomUser.StatusChoices.REJECTED:
+      raise serializers.ValidationError(
+        {"account_rejected": ["Your account application has been rejected"]}
+      )
+
+    return attrs
+
+  
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
   role = serializers.SerializerMethodField()
