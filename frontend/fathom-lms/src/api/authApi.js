@@ -1,4 +1,4 @@
-import apiClient, { logResponse } from "./apiClient";
+import apiClient, { logResponse, isClientError } from "./apiClient";
 
 const prefix = '/api/users/auth';
 
@@ -6,10 +6,21 @@ export const authApi = {
 
   signIn: async (username, password) => {
     const data = { username, password };
-    const response = await apiClient.post(`${prefix}/login`, data);
-    logResponse(response);
-    
-    return response.data;
+    try {
+      const response = await apiClient.post(`${prefix}/login`, data);
+      logResponse(response);
+      return response.data;
+    } catch (error) {
+      if (isClientError(error)) {
+        if (error.response && error.response.data){
+          return error.response.data
+        }
+        console.error(`Unexpected error: ${JSON.stringify(error)}`)
+      } else {
+        console.error(`Unexpected error: ${JSON.stringify(error)}`)
+      }
+      return null
+    } 
   },
 
   signOut: async () => {

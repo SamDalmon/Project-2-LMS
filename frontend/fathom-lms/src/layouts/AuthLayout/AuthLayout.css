@@ -8,6 +8,9 @@
 }
 
 .auth-layout-container {
+  width: 25vw;
+  min-width: 230px;
+  max-width: 350px;
   background-color: var(--background-color);
   padding: 70px;
   border-radius: 30px;
@@ -20,8 +23,14 @@
 
 .nav-container {
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  padding: 0px 5px;
+  margin: 10px 0px;
+}
+
+.auth-error {
   margin-top: 10px;
-  margin-bottom: 10px;
+  color: var(--error-red);
 }

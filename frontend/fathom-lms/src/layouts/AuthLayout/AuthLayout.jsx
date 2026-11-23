@@ -9,7 +9,7 @@ export default function AuthLayout ({
   title, leftLink, rightLink, 
   authFields, setAuthFields, 
   signUpFields=null, setSignUpFields=null, 
-  onSubmit 
+  onSubmit, authError, setAuthError
 }) {
 
   const allFields = useMemo (() => 
@@ -42,10 +42,11 @@ export default function AuthLayout ({
   }, [allFields])
 
   const handleSubmit = useCallback(() => {
+    setAuthError('')
     if( validateForm() ){
       onSubmit()
     }
-  }, [validateForm, onSubmit])
+  }, [validateForm, onSubmit, setAuthError])
 
   useEffect(() => {
     const handleGlobalKeyDown = (event) => {
@@ -70,7 +71,7 @@ export default function AuthLayout ({
           { leftLink }
           { rightLink }
         </nav>
-        <Stack spacing={1} direction='column'>
+        <Stack spacing={1} direction='column' sx={{width: '100%'}}>
           <AuthForm 
             authFields={ authFields } setAuthFields={ setAuthFields }
             formErrors={ formErrors } setFormErrors={ setFormErrors }
@@ -90,6 +91,7 @@ export default function AuthLayout ({
             Submit
           </Button>
         </Stack>
+        <p className='auth-error'>{ authError }</p>
       </div>
     </div>
   )

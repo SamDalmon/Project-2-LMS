@@ -79,9 +79,13 @@ apiClient.interceptors.response.use(
 
 export function logResponse(response){
   console.log('Status: ', response.status);
-  console.log('Data: ', response.data);
+  console.log('Data: ', JSON.stringify(response.data));
 }
 
 export function isRequestCanceled(error) {
   return axios.isCancel(error)
+}
+
+export function isClientError(error) {
+  return axios.isAxiosError(error)
 }

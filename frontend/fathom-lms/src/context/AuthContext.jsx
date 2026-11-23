@@ -49,19 +49,20 @@ export function AuthProvider ({ children }) {
   }, [logout]);
   
   const login = async ({username, password}) => {
-    try {
-      const response = await authApi.signIn(username, password);
+    
+    const response = await authApi.signIn(username, password);
+    if (response.user){
       const { user } = response;
-
       setUser(user);
       return { success: true };
-    
-    } catch (error) {
+    } else {
+      console.log(JSON.stringify(response))
+      const error = response['non_field_errors'] ?? response['account_rejected'] ?? JSON.stringify(response)
       return {
         success: false,
-        error: error.response?.data?.message || 'Invalid credentials'
+        error: error || 'Unexpected Error'
       };
-    };
+    }
   };
 
   const teacherSignUp = async (signUpFields) => {
