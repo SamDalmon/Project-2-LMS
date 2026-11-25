@@ -49,51 +49,36 @@ export function AuthProvider ({ children }) {
   }, [logout]);
   
   const login = async ({username, password}) => {
-    
     const response = await authApi.signIn(username, password);
+    return handleAuthResponse(response);
+  };
+
+  const teacherSignUp = async (signUpFields) => {
+    const response = await authApi.teacherSignUp(signUpFields);
+    return handleAuthResponse(response);
+  };
+
+  const studentSignUp = async (signUpFields) => {
+    const response = await authApi.studentSignUp(signUpFields);
+    return handleAuthResponse(response);
+  };
+
+  const handleAuthResponse = (response) => {
     if (response.user){
       const { user } = response;
       setUser(user);
       return { success: true };
     } else {
-      console.log(JSON.stringify(response))
-      const error = response['non_field_errors'] ?? response['account_rejected'] ?? JSON.stringify(response)
+      console.log(JSON.stringify(response));
+      const error = response['non_field_errors'] 
+        ?? response['account_rejected'] 
+        ?? JSON.stringify(response)
       return {
         success: false,
         error: error || 'Unexpected Error'
       };
-    }
-  };
-
-  const teacherSignUp = async (signUpFields) => {
-    try {
-      const response = await authApi.teacherSignUp(signUpFields);
-      const { user } = response;
-
-      setUser(user);
-      return { success: true };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.response?.data?.message
-      };
     };
-  };
-
-  const studentSignUp = async (signUpFields) => {
-    try {
-      const response = await authApi.studentSignUp(signUpFields);
-      const { user } = response;
-
-      setUser(user);
-      return { success: true };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.response?.data?.message
-      };
-    };
-  };
+  }
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, teacherSignUp, studentSignUp, logout }}>
