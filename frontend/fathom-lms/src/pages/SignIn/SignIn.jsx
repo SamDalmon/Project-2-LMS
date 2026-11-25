@@ -16,7 +16,7 @@ export default function SignIn () {
       console.log('Sign in successful')
       navigate('/courses')
     } else {
-      console.log(`Sign in Failed: ${error}`)
+      console.error(`Sign in Failed: ${error}`)
       setError(`Sign in failed: ${error}`)
     }
   }
