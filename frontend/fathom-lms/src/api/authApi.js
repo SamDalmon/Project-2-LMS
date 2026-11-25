@@ -1,9 +1,8 @@
 import apiClient, { logResponse, isClientError } from "./apiClient";
 
-const prefix = '/api/users/auth';
+const prefix = "/api/users/auth";
 
 export const authApi = {
-
   signIn: async (username, password) => {
     const data = { username, password };
     try {
@@ -12,15 +11,13 @@ export const authApi = {
       return response.data;
     } catch (error) {
       if (isClientError(error)) {
-        if (error.response && error.response.data){
-          return error.response.data
+        if (error.response?.data) {
+          return error.response.data;
         }
-        console.error(`Unexpected error: ${JSON.stringify(error)}`)
-      } else {
-        console.error(`Unexpected error: ${JSON.stringify(error)}`)
       }
-      return null
-    } 
+      console.error(`Unexpected error: ${JSON.stringify(error)}`);
+      return null;
+    }
   },
 
   signOut: async () => {
@@ -31,25 +28,57 @@ export const authApi = {
   },
 
   studentSignUp: async (signUpFields) => {
-    const data = {...signUpFields, password1: signUpFields.password, password2: signUpFields.password};
-    const response = await apiClient.post(`${prefix}/registration/student`, data);
-    logResponse(response);
-
-    return response.data;
+    const data = {
+      ...signUpFields,
+      password1: signUpFields.password,
+      password2: signUpFields.password,
+    };
+    try {
+      const response = await apiClient.post(
+        `${prefix}/registration/student`,
+        data,
+      );
+      logResponse(response);
+      return response.data;
+    } catch (error) {
+      if (isClientError(error)) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+      }
+      console.error(`Unexpected error: ${JSON.stringify(error)}`);
+      return null;
+    }
   },
 
   teacherSignUp: async (signUpFields) => {
-    const data = {...signUpFields, password1: signUpFields.password, password2: signUpFields.password};    
-    const response = await apiClient.post(`${prefix}/registration/teacher`, data);
-    logResponse(response);
-
-    return response.data;
+    const data = {
+      ...signUpFields,
+      password1: signUpFields.password,
+      password2: signUpFields.password,
+    };
+    try {
+      const response = await apiClient.post(
+        `${prefix}/registration/teacher`,
+        data,
+      );
+      logResponse(response);
+      return response.data;
+    } catch (error) {
+      if (isClientError(error)) {
+        if (error.response?.data) {
+          return error.response.data;
+        }
+      }
+      console.error(`Unexpected error: ${JSON.stringify(error)}`);
+      return null;
+    }
   },
 
-  getCurrentUser: async (signal) => { 
+  getCurrentUser: async (signal) => {
     const response = await apiClient.get(`${prefix}/user`, { signal });
     logResponse(response);
 
     return response.data;
-  }
-}
+  },
+};

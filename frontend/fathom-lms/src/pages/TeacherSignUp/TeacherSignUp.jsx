@@ -4,8 +4,7 @@ import AuthLayout from '../../layouts/AuthLayout/AuthLayout'
 import { useAuth } from '../../context/AuthContext'
 
 export default function TeacherSignUp () {
-  const navigate = useNavigate()
-  const { teacherSignUp } = useAuth()
+  const [error, setError] = useState('');
   const [ authFields, setAuthFields ] = useState({ 
     username: '', password: '' 
   })
@@ -20,7 +19,8 @@ export default function TeacherSignUp () {
       console.log('Teacher sign up successful')
       navigate('/courses') 
     } else {
-      console.log(`Teacher sign up failed: ${error}`)
+      console.error(`Teacher sign up failed: ${error}`);
+      setError(`Sign up failed: ${error}`)
     }
   }
 
@@ -35,6 +35,8 @@ export default function TeacherSignUp () {
         signUpFields={ signUpFields }
         setSignUpFields={ setSignUpFields }
         onSubmit={ onSubmit }
+        authError={ error }
+        setAuthError={ setError }
       />
     </>
   )

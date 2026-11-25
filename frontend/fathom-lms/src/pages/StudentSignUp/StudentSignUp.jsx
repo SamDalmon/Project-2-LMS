@@ -17,10 +17,11 @@ export default function StudentSignUp () {
     const { success, error } = await studentSignUp({...authFields, ...signUpFields})
   
     if (success) {
-      console.log('Student sign up successful')
-      navigate('/courses')
+      console.log('Student sign up successful');
+      navigate('/courses');
     } else {
-      console.log(`Student sign up failed: ${error}`)
+      console.error(`Student sign up failed: ${error}`);
+      setError(`Sign up failed: ${error}`);
     }
   }
 
@@ -35,6 +36,8 @@ export default function StudentSignUp () {
         signUpFields={ signUpFields }
         setSignUpFields={ setSignUpFields }
         onSubmit={ onSubmit }
+        authError={ error }
+        setAuthError={ setError }
       />
     </>
   )
