@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext'
 export default function StudentSignUp () {
   const navigate = useNavigate()
   const { studentSignUp } = useAuth()
+  const [error, setError] = useState('');
   const [ authFields, setAuthFields ] = useState({ 
     username: '', password: '' 
   })
