@@ -97,7 +97,7 @@ export default function AuthLayout ({
         </Stack>
         { errorEntries.map(([field, errors]) => {
           const messages = Array.isArray(errors) ? errors : [errors]
-          const fieldTitle = field.replace('_', ' ').replace(/\d/g, '')
+          const fieldTitle = field.replaceAll('_', ' ').replace(/\d/g, '')
           return (
             <div className='auth-error-container' key={ field || 'auth-error' } >
               { field && <h4 className='auth-error-header'>{ fieldTitle }</h4> }
