@@ -70,9 +70,7 @@ export function AuthProvider ({ children }) {
       return { success: true };
     } else {
       console.log(JSON.stringify(response));
-      const error = response['non_field_errors'] 
-        ?? response['account_rejected'] 
-        ?? JSON.stringify(response)
+      const error = response;
       return {
         success: false,
         error: error || 'Unexpected Error'

@@ -8,7 +8,7 @@ export default function SignIn () {
   const navigate = useNavigate()
   const { login } = useAuth()
   const [authFields, setAuthFields] = useState({ username: '', password:'' })
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState({})
 
   const onSubmit = async () => {
     const {success, error} = await login(authFields)
@@ -16,8 +16,8 @@ export default function SignIn () {
       console.log('Sign in successful')
       navigate('/courses')
     } else {
-      console.error(`Sign in Failed: ${error}`)
-      setError(`Sign in failed: ${error}`)
+      console.error(`Sign in Failed: ${JSON.stringify(error)}`)
+      setErrors(error)
     }
   }
 
@@ -30,8 +30,8 @@ export default function SignIn () {
         authFields={ authFields }
         setAuthFields={ setAuthFields }
         onSubmit={ onSubmit } 
-        authError={ error }
-        setAuthError={ setError }
+        authErrors={ errors }
+        setAuthErrors={ setErrors }
       />
     </>
   )

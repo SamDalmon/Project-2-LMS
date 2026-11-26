@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext'
 export default function StudentSignUp () {
   const navigate = useNavigate()
   const { studentSignUp } = useAuth()
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
   const [ authFields, setAuthFields ] = useState({ 
     username: '', password: '' 
   })
@@ -21,8 +21,8 @@ export default function StudentSignUp () {
       console.log('Student sign up successful');
       navigate('/courses');
     } else {
-      console.error(`Student sign up failed: ${error}`);
-      setError(`Sign up failed: ${error}`);
+      console.error(`Student sign up failed: ${JSON.stringify(error)}`);
+      setErrors(error);
     }
   }
 
@@ -37,8 +37,8 @@ export default function StudentSignUp () {
         signUpFields={ signUpFields }
         setSignUpFields={ setSignUpFields }
         onSubmit={ onSubmit }
-        authError={ error }
-        setAuthError={ setError }
+        authErrors={ errors }
+        setAuthErrors={ setErrors }
       />
     </>
   )

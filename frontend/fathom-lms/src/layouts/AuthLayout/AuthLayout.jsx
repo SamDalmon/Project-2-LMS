@@ -9,7 +9,7 @@ export default function AuthLayout ({
   title, leftLink, rightLink, 
   authFields, setAuthFields, 
   signUpFields=null, setSignUpFields=null, 
-  onSubmit, authError, setAuthError
+  onSubmit, authErrors, setAuthErrors
 }) {
 
   const allFields = useMemo (() => 
@@ -42,11 +42,15 @@ export default function AuthLayout ({
   }, [allFields])
 
   const handleSubmit = useCallback(() => {
-    setAuthError('')
+    setAuthErrors('')
     if( validateForm() ){
       onSubmit()
     }
-  }, [validateForm, onSubmit, setAuthError])
+  }, [validateForm, onSubmit, setAuthErrors])
+
+  const errorEntries = typeof authErrors === 'string'
+    ? (authErrors ? [['', authErrors]] : [])
+    : Object.entries(authErrors ?? {})
 
   useEffect(() => {
     const handleGlobalKeyDown = (event) => {
@@ -91,7 +95,22 @@ export default function AuthLayout ({
             Submit
           </Button>
         </Stack>
-        <p className='auth-error'>{ authError }</p>
+        { errorEntries.map(([field, errors]) => {
+          const messages = Array.isArray(errors) ? errors : [errors]
+          const fieldTitle = field.replace('_', ' ').replace(/\d/g, '')
+          return (
+            <div className='auth-error-container' key={ field || 'auth-error' } >
+              { field && <h4 className='auth-error-header'>{ fieldTitle }</h4> }
+              <ul>
+                { messages.map((error, index) => (
+                  <li key={ `${field}-${index}` } className='auth-error'>
+                    { String(error) }
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

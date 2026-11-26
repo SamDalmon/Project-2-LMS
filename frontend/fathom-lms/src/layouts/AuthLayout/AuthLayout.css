@@ -30,7 +30,17 @@
   margin: 10px 0px;
 }
 
-.auth-error {
+.auth-error-container {
   margin-top: 10px;
+  padding: 0px 10px;
+}
+
+.auth-error-container > * {
   color: var(--error-red);
+  text-align: left;
+  margin: 0;
+}
+
+.auth-error-container > *::first-letter {
+  text-transform: uppercase;
 }
