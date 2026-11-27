@@ -154,6 +154,7 @@ Local Host: ```http://127.0.0.1:8000/```
 ## Maintenance
 * Make some of the terminology more consistent
 * make semi colons use more consistent
+* remove repeated or unused constants
 
 ## Features
 * allow teachers to assign them selves to courses, and only allow them to edit their courses
