@@ -4,7 +4,7 @@ import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button } from '@mui/material';
 
 export default function UserCard ({ 
-  user, handleApprove, handleReject 
+  user, setEditingId, handleApprove, handleReject 
 }){
 
   const userInfo = { 
@@ -47,22 +47,38 @@ export default function UserCard ({
           ))  
         }
       </dl>
-      { user.status === 'PENDING' && (
-        <Stack className='button-container' spacing={0.5} direction='column'>
+      <Stack 
+        className='button-container' 
+        spacing={0.5} 
+        direction='column'
+        sx={{ width: '90px' }}
+      >
+        { user.status === 'PENDING' && (<>
           <Button 
             id='approve-button'
             onClick={ () => handleApprove(user) }
             variant='contained'
             sx={{ backgroundColor: 'var(--primary-theme)' }}
-          > Approve </Button>
+          >Approve</Button>
           <Button 
             id='reject-button'
             onClick={ () => handleReject(user) }
             variant='contained'
             sx={{ backgroundColor: 'var(--secondary-theme)' }}
-          > Reject </Button>
-        </Stack>
-      )}
+          >Reject</Button>
+        </>)}
+        { user.status !== 'PENDING' && (
+          <Button
+            id='edit-button'
+            onClick={ () => setEditingId(user.pk) }
+            variant='contained'
+            sx={{ 
+              backgroundColor: 'var(--button-grey)', 
+            }}
+
+          >Edit</Button>
+        )}
+      </Stack>
     </div>
   )
 }
