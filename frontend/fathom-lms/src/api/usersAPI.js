@@ -27,5 +27,15 @@ export const usersApi = {
 
     return response.data;
   },
+
+  updateUser: async (updatedUser) => {
+    const response = await apiClient.put(
+      `${prefix}${updatedUser.pk}/`,
+      updatedUser
+    );
+    logResponse(response);
+
+    return response.data;
+  }
 }
 
