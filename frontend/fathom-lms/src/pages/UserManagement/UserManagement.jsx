@@ -4,8 +4,11 @@ import MainLayout from '../../layouts/MainLayout/MainLayout';
 import { useEffect, useState } from 'react';
 import { usersApi } from '../../api/usersAPI';
 import { isRequestCanceled } from '../../api/apiClient';
+import { useAuth } from '../../context/AuthContext';
 
 export default function UserManagement () {
+  const { user } = useAuth()
+  const currentUserId = user.pk
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -74,6 +77,7 @@ export default function UserManagement () {
               user={ user }
               handleApprove={ handleApprove }
               handleReject={ handleReject }
+                isCurrentUser={ currentUserId === user.pk }
             />
           ))
         }

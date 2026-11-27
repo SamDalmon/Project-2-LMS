@@ -4,7 +4,7 @@ import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button } from '@mui/material';
 
 export default function UserCard ({ 
-  user, setEditingId, handleApprove, handleReject 
+  user, setEditingId, handleApprove, handleReject, isCurrentUser 
 }){
 
   const userInfo = { 
@@ -29,6 +29,7 @@ export default function UserCard ({
 
   return (
     <div className='card-container'>
+      <div className='account-icon-container'>
       <AccountCircle 
         className='account-icon'
         sx={{ 
@@ -37,6 +38,8 @@ export default function UserCard ({
           borderRadius: '100%', 
         }}
       />
+        { isCurrentUser && <p>(You)</p> }
+      </div>
       <dl className='user-info-container'>
         {
           Object.entries(userInfo).map(([key, value]) => (

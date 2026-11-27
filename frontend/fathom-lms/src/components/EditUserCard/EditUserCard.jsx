@@ -4,7 +4,7 @@ import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button, TextField } from '@mui/material';
 
 export default function EditUserCard ({ 
-  initialUser, handleSave, handleCancel 
+  initialUser, handleSave, handleCancel, isCurrentUser 
 }){
 
   const [user, setUser] = useState(initialUser);
@@ -69,16 +69,19 @@ export default function EditUserCard ({
 
   return (
     <div className='card-container'>
-      <AccountCircle 
-        className='account-icon'
-        sx={{ 
-          fontSize: '50px',
-          border: `3px solid ${ iconColor }`, 
-          borderRadius: '100%', 
-        }}
-      />
-      <dl className='user-edit-container'>
-        <Stack spacing={1} direction='column'>
+      <div className='account-icon-container'>
+        <AccountCircle 
+          className='account-icon'
+          sx={{ 
+            fontSize: '50px',
+            border: `3px solid ${ iconColor }`, 
+            borderRadius: '100%', 
+          }}
+        />
+        { isCurrentUser && <p>(You)</p> }
+      </div>
+      <div className='user-edit-container'>
+        <Stack spacing={1} direction='column' sx={{ width: '100%' }}>
         {
           Object.entries(user).map(([key, value]) =>
             editableFields.includes(key) && (
@@ -93,14 +96,15 @@ export default function EditUserCard ({
                 sx={{
                   '& .MuiInputLabel-root': {
                     textTransform: 'capitalize'
-                  }
+                  },
+                  flexGrow: 1
                 }}
               />
             )
           )
         }
         </Stack>
-      </dl>
+      </div>
       <Stack className='button-container' spacing={0.5} direction='column'>
         <Button 
           id='save-button'
