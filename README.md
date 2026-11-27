@@ -150,3 +150,10 @@ Local Host: ```http://127.0.0.1:8000/```
 /api/users/permissions  users.views.UserPermissionsView users:user-permissions
 
 # Future Improvements 
+
+## Maintenance
+* Make some of the terminology more consistent
+* make semi colons use more consistent
+
+## Features
+* allow teachers to assign them selves to courses, and only allow them to edit their courses
