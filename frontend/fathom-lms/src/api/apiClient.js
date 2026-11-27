@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const isLogging = false;
+
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/',
   withCredentials: true,
@@ -78,8 +80,10 @@ apiClient.interceptors.response.use(
 
 
 export function logResponse(response){
-  console.log('Status: ', response.status);
-  console.log('Data: ', JSON.stringify(response.data));
+  if (isLogging){
+    console.log('Status: ', response.status);
+    console.log('Data: ', JSON.stringify(response.data));
+  }
 }
 
 export function isRequestCanceled(error) {
