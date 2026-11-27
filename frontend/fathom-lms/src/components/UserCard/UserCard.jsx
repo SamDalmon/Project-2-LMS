@@ -8,8 +8,9 @@ export default function UserCard ({
 }){
 
   const userInfo = { 
-    name: `${user.first_name} ${user.last_name}`,
+    username: user.username,
     email: user.email,
+    name: `${user.first_name} ${user.last_name}`,
     role: user.role
   }
 
@@ -30,14 +31,14 @@ export default function UserCard ({
   return (
     <div className='card-container'>
       <div className='account-icon-container'>
-      <AccountCircle 
-        className='account-icon'
-        sx={{ 
-          fontSize: '50px',
-          border: `3px solid ${ iconColor }`, 
-          borderRadius: '100%', 
-        }}
-      />
+        <AccountCircle 
+          className='account-icon'
+          sx={{ 
+            fontSize: '50px',
+            border: `3px solid ${ iconColor }`, 
+            borderRadius: '100%', 
+          }}
+        />
         { isCurrentUser && <p>(You)</p> }
       </div>
       <dl className='user-info-container'>
