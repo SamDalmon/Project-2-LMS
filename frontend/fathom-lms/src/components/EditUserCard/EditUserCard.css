@@ -1,24 +1,11 @@
 @import '@/index.css';
 
-dt,dd {
-  color: var(--dark-text);
-  text-align: start;
-  padding: 0px;
-  margin: 0px;
-  margin-left: 10px;
-}
-
-dt { 
-  text-align: start; 
-  text-transform: capitalize;
-  font-weight: bold;
-}
-
 .card-container {
   display: flex;
   align-items: center;
   width: 40vw;
   min-width: 400px;
+  gap: 10px;
   border: 2px solid #c1c1c1;
   border-radius: var(--radius-md);
   padding: 10px
@@ -26,11 +13,20 @@ dt {
 
 .user-edit-container {
   margin: 0;
-  margin-left: 10px;
   display: grid;
   grid-template-columns: auto auto;
+  margin-right: auto;
 }
 
-.button-container {
-  margin-left: auto;
+@media (width <= 560px) {
+  .card-container {
+    width: max-content;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-edit-container {
+    margin: auto;
+  }
 }
