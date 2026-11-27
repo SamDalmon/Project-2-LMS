@@ -5,13 +5,16 @@ dt,dd {
   text-align: start;
   padding: 0px;
   margin: 0px;
-  margin-left: 10px;
 }
 
 dt { 
   text-align: start; 
   text-transform: capitalize;
   font-weight: bold;
+}
+
+dd { 
+  margin-left: 10px; 
 }
 
 .card-container {
@@ -30,4 +33,17 @@ dt {
   margin-right: auto;
   display: grid;
   grid-template-columns: auto auto;
+}
+
+@media (width <= 560px) {
+  .card-container {
+    width: max-content;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-info-container {
+    margin: auto;
+  }
 }
