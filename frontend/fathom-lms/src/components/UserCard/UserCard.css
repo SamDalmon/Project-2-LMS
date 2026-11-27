@@ -27,10 +27,7 @@ dt {
 .user-info-container {
   margin: 0;
   margin-left: 10px;
+  margin-right: auto;
   display: grid;
   grid-template-columns: auto auto;
-}
-
-.button-container {
-  margin-left: auto;
 }
