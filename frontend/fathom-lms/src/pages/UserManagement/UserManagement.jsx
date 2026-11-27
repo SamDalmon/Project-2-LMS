@@ -1,5 +1,6 @@
 import './UserManagement.css'
 import UserCard from '../../components/UserCard/UserCard';
+import EditUserCard from '../../components/EditUserCard/EditUserCard';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import { useEffect, useState } from 'react';
 import { usersApi } from '../../api/usersAPI';
@@ -7,10 +8,11 @@ import { isRequestCanceled } from '../../api/apiClient';
 import { useAuth } from '../../context/AuthContext';
 
 export default function UserManagement () {
-  const { user } = useAuth()
+  const { user, fetchCurrentUser } = useAuth()
   const currentUserId = user.pk
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
+  const [editingId, setEditingId] = useState('')
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -64,6 +66,23 @@ export default function UserManagement () {
     }
   }
 
+  const handleUserEdit = async ( updatedUser ) => {
+    console.log(JSON.stringify(updatedUser))
+    try {
+      await usersApi.updateUser(updatedUser)
+      handleUserUpdate(updatedUser)
+      setEditingId('')
+    } catch (error) {
+      console.error(`Editing user ${updatedUser.username} failed for ${error}`)
+    }
+
+    if (updatedUser.pk === user.pk){
+      fetchCurrentUser()
+    }
+  }
+
+  const handleCancel = () => setEditingId('')
+
   if (loading) return <h2>Loading Users...</h2>
   if (error) return <h2>Error: {error}</h2>
 
@@ -71,15 +90,26 @@ export default function UserManagement () {
     <MainLayout content= {(
       <div className='users-container'>
         {
-          users.map(user => (
-            <UserCard 
-              key={ user.pk } 
-              user={ user }
-              handleApprove={ handleApprove }
-              handleReject={ handleReject }
+          users.map(user => 
+            editingId !== user.pk ? (
+              <UserCard 
+                key={ user.pk } 
+                user={ user }
+                setEditingId={ setEditingId }
+                handleApprove={ handleApprove }
+                handleReject={ handleReject }
                 isCurrentUser={ currentUserId === user.pk }
-            />
-          ))
+              />
+            ) : (
+              <EditUserCard 
+                key={ user.pk } 
+                initialUser={ user }
+                handleSave={ handleUserEdit }
+                handleCancel={ handleCancel }
+                isCurrentUser={ currentUserId === user.pk }
+              />
+            )
+          )
         }
       </div>
     )}/>
