@@ -1,12 +1,12 @@
-import './CourseInfo.css'
+import styles from './CourseInfo.module.css'
 
 export default function CourseInfo({ title, description }) {
 
   return (
     <>
-      <div className='course-info-container'> 
-        <h3 className='title'>{ title }</h3>
-        <p className='description'>{ description }</p>
+      <div className={ styles.infoContainer }> 
+        <h3>{ title }</h3>
+        <p>{ description }</p>
       </div>
     </>
   )
