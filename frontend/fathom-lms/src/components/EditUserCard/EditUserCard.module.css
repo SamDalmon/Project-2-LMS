@@ -1,6 +1,6 @@
 @import '@/index.css';
 
-.card-container {
+.cardContainer {
   display: flex;
   align-items: center;
   width: 40vw;
@@ -11,7 +11,7 @@
   padding: 10px
 }
 
-.user-edit-container {
+.userEditContainer {
   margin: 0;
   display: grid;
   grid-template-columns: auto auto;
@@ -19,14 +19,14 @@
 }
 
 @media (width <= 560px) {
-  .card-container {
+  .cardContainer {
     width: max-content;
     min-width: 0;
     flex-direction: column;
     justify-content: center;
   }
 
-  .user-edit-container {
+  .userEditContainer {
     margin: auto;
   }
 }

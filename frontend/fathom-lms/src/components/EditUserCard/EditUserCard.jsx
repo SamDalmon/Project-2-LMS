@@ -1,4 +1,4 @@
-import './EditUserCard.css'
+import styles from './EditUserCard.module.css'
 import { useState } from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button, TextField } from '@mui/material';
@@ -68,10 +68,10 @@ export default function EditUserCard ({
   };
 
   return (
-    <div className='card-container'>
-      <div className='account-icon-container'>
+    <div className={ styles.cardContainer }>
+      <div className={ styles.accountIconContainer}>
         <AccountCircle 
-          className='account-icon'
+          className={ styles.accountIcon }
           sx={{ 
             fontSize: '50px',
             border: `3px solid ${ iconColor }`, 
@@ -80,7 +80,7 @@ export default function EditUserCard ({
         />
         { isCurrentUser && <p>(You)</p> }
       </div>
-      <div className='user-edit-container'>
+      <div className={ styles.userEditContainer }>
         <Stack spacing={1} direction='column' sx={{ width: '100%' }}>
         {
           Object.entries(user).map(([key, value]) =>
@@ -105,7 +105,7 @@ export default function EditUserCard ({
         }
         </Stack>
       </div>
-      <Stack className='button-container' spacing={0.5} direction='column'>
+      <Stack className={ styles.buttonContainer } spacing={0.5} direction='column'>
         <Button 
           id='save-button'
           onClick={ onSave }
