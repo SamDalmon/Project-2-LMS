@@ -1,4 +1,4 @@
-import './UserCard.css'
+import styles from './UserCard.module.css'
 import React from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import { Stack, Button } from '@mui/material';
@@ -29,10 +29,10 @@ export default function UserCard ({
   }
 
   return (
-    <div className='card-container'>
-      <div className='account-icon-container'>
+    <div className={ styles.cardContainer }>
+      <div className={ styles.accountIconContainer }>
         <AccountCircle 
-          className='account-icon'
+          className={ styles.accountIcon }
           sx={{ 
             fontSize: '50px',
             border: `3px solid ${ iconColor }`, 
@@ -41,18 +41,18 @@ export default function UserCard ({
         />
         { isCurrentUser && <p>(You)</p> }
       </div>
-      <dl className='user-info-container'>
+      <dl className={ styles.userInfoContainer }>
         {
           Object.entries(userInfo).map(([key, value]) => (
             <React.Fragment key={key}>
-              <dt>{ key }</dt>
-              <dd>{ value }</dd>
+              <dt className={ styles.infoKey }>{ key }</dt>
+              <dd className={ styles.infoValue } >{ value }</dd>
             </React.Fragment>
           ))  
         }
       </dl>
       <Stack 
-        className='button-container' 
+        className={ styles.buttonContainer } 
         spacing={0.5} 
         direction='column'
         sx={{ width: '90px' }}

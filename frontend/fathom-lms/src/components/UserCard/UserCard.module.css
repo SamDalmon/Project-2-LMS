@@ -1,25 +1,25 @@
 @import '@/index.css';
 
-dt,dd {
+.infoKey, .infoValue {
   color: var(--dark-text);
   text-align: start;
   padding: 0px;
   margin: 0px;
 }
 
-dt { 
+.infoKey { 
   text-align: start; 
   text-transform: capitalize;
   font-weight: bold;
 }
 
-dd { 
+.infoValue { 
   margin-left: 10px;
   text-wrap: wrap;
   overflow-wrap: break-word;
 }
 
-.card-container {
+.cardContainer {
   display: flex;
   align-items: center;
   width: 40vw;
@@ -29,7 +29,7 @@ dd {
   padding: 10px
 }
 
-.user-info-container {
+.userInfoContainer {
   margin: 0;
   margin-left: 10px;
   margin-right: auto;
@@ -38,14 +38,14 @@ dd {
 }
 
 @media (width <= 560px) {
-  .card-container {
+  .cardContainer {
     width: max-content;
     min-width: 0;
     flex-direction: column;
     justify-content: center;
   }
 
-  .user-info-container {
+  .userInfoContainer {
     margin: auto;
   }
 }
