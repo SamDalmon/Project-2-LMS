@@ -61,6 +61,7 @@ export default function CourseEdit({
           id='title-edit'
           label='Edit Title'
           variant='outlined'
+          multiline
           value={ course.title }
           onChange={ handleChange }
           error={ formErrors.title }
@@ -77,6 +78,7 @@ export default function CourseEdit({
           id='description-edit'
           label='Edit Description'
           variant='outlined'
+          multiline
           value={ course.description }
           onChange={ handleChange }
           error={ formErrors.description }
@@ -88,14 +90,14 @@ export default function CourseEdit({
             }
           }}
         />
-        <TeacherActions 
-          course={ course }
-          isEditing={ isEditing } 
-          setIsEditing={ handleOnEdit }
-          handleSave={ handleSave }
-          handleCancel={ handleCancel }
-        />
       </div>
+      <TeacherActions 
+        course={ course }
+        isEditing={ isEditing } 
+        setIsEditing={ handleOnEdit }
+        handleSave={ handleSave }
+        handleCancel={ handleCancel }
+      />
     </div>
   )
 }
