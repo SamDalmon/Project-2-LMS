@@ -1,4 +1,4 @@
-import './CourseEdit.css'
+import styles from './CourseEdit.module.css'
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import TeacherActions from '../TeacherActions/TeacherActions'
@@ -54,8 +54,8 @@ export default function CourseEdit({
   }
 
   return (
-    <div className='course-edit-container'>
-      <div className='edit-container'>
+    <div className={ styles.courseEditContainer }>
+      <div className={ styles.editContainer }>
         <TextField 
           name='title'
           id='title-edit'
