@@ -1,4 +1,4 @@
-import './AuthLayout.css'
+import styles from './AuthLayout.module.css'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import AuthForm from '@/components/AuthForm'
@@ -68,10 +68,10 @@ export default function AuthLayout ({
   }, [handleSubmit])
 
   return (
-    <div className="auth-layout">
-      <div className="auth-layout-container">
+    <div className={ styles.authLayout }>
+      <div className={ styles.authLayoutContainer }>
         <h2>{ title }</h2>
-        <nav className='nav-container'>
+        <nav className={ styles.navContainer }>
           { leftLink }
           { rightLink }
         </nav>
@@ -99,11 +99,11 @@ export default function AuthLayout ({
           const messages = Array.isArray(errors) ? errors : [errors]
           const fieldTitle = field.replaceAll('_', ' ').replace(/\d/g, '')
           return (
-            <div className='auth-error-container' key={ field || 'auth-error' } >
-              { field && <h4 className='auth-error-header'>{ fieldTitle }</h4> }
+            <div className={ styles.authErrorContainer } key={ field || 'auth-error' } >
+              { field && <h4 className={ styles.authErrorHeader }>{ fieldTitle }</h4> }
               <ul>
                 { messages.map((error, index) => (
-                  <li key={ `${field}-${index}` } className='auth-error'>
+                  <li className={ styles.auth-error } key={ `${field}-${index}` }  >
                     { String(error) }
                   </li>
                 ))}

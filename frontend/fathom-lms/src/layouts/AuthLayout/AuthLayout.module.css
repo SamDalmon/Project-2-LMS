@@ -1,13 +1,13 @@
 @import '@/index.css';
 
-.auth-layout {
+.authLayout {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-.auth-layout-container {
+.authLayoutContainer {
   width: 25vw;
   min-width: 230px;
   max-width: 350px;
@@ -22,7 +22,7 @@
   text-align: center;
 } 
 
-.nav-container {
+.navContainer {
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -32,28 +32,28 @@
   margin: 10px 0px;
 }
 
-.auth-error-container {
+.authErrorContainer {
   margin-top: 10px;
   padding: 0px 10px;
 }
 
-.auth-error-container > * {
+.authErrorContainer > * {
   color: var(--error-red);
   text-align: left;
   margin: 0;
 }
 
-.auth-error-container > *::first-letter {
+.authErrorContainer > *::first-letter {
   text-transform: uppercase;
 }
 
 @media (width <= 700px) {
-  .nav-container {
+  .navContainer {
     flex-direction: column;
     gap: 10px
   }
 
-  .auth-layout-container {
+  .authLayoutContainer {
     padding: 70px min(5vw, 70px);
   }
 }
