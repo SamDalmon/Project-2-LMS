@@ -1,16 +1,16 @@
 @import '@/index.css';
 
-.main-layout {
+.mainLayout {
   display: flex;
   justify-content: center;
   align-items: start;
   min-height: 100vh;
 }
 
-.main-layout-container {
+.mainLayoutContainer {
   background-color: var(--background-color);
   padding: 70px;
-  border-radius: var(--radius-lg);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   display: flex;
   flex-direction: column;
   justify-content: center;
