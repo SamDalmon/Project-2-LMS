@@ -1,6 +1,6 @@
 @import '@/index.css';
 
-img {
+.fathomLogo {
   background-color: transparent;
   height: calc(var(--header-height) - 10px);
   margin: 5px;
@@ -18,19 +18,19 @@ img {
   z-index: 1000;
 }
 
-.hero-container {
+.heroContainer {
   display: flex;
   align-items: center;
   margin-right: 20px;
 }
 
-.account-info-container{
+.accountInfoContainer{
   margin-left: auto;
   display: flex;
   gap: 4px;
 }
 
-.pending-status-warning {
+.pendingStatusWarning {
   height: calc(var(--header-height) - 10px);
   width: 250px;
   box-sizing: border-box;
@@ -44,7 +44,7 @@ img {
   align-items: center;
 }
 
-.back-link {
+.backLink {
   position: absolute;
   margin-top: var(--header-height);
   background-color: var(--header-background-color);
@@ -58,7 +58,7 @@ img {
     flex-direction: column;
   }
 
-  .app-title {
+  .appTitle {
     font-size: min(6cqi, var(--font-xl));
   }
 }
