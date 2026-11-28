@@ -1,4 +1,4 @@
-import './CourseTile.css'
+import styles from './CourseTile.module.css'
 import Stack from '@mui/material/Stack'
 import CourseInfo from '../CourseInfo/CourseInfo'
 import StudentActions from '../StudentActions/StudentActions'
@@ -16,7 +16,7 @@ export default function CourseTile({
   
   return (
     <>
-      <div className='course-tile'>
+      <div className={ styles.courseTile }>
         { (canEdit && isEditing) ?
           <CourseEdit
               initialCourse={ course }

@@ -1,6 +1,6 @@
 @import '@/index.css';
 
-.course-tile {
+.courseTile {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -11,11 +11,5 @@
   border-radius: var(--radius-md);
 }
 
-.course-info-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: auto;
-}
 
 
