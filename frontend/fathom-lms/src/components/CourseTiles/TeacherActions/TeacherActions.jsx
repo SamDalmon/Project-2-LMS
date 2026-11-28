@@ -1,4 +1,4 @@
-import './TeacherActions.css'
+import styles from './TeacherActions.module.css'
 import { PRIMARY_THEME, SECONDARY_THEME, BUTTON_GREY } from "../../../constants";
 import Button from '@mui/material/Button'
 
@@ -15,7 +15,7 @@ export default function TeacherActions({
 
   return (
     <>
-      <div className='actions-container'>
+      <div className={ styles.actionsContainer }>
         { 
           isEditing ? (
             <>
