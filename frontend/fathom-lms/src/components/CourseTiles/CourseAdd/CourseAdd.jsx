@@ -1,4 +1,4 @@
-import './CourseAdd.css'
+import styles from './CourseAdd.module.css'
 import { ControlPoint } from '@mui/icons-material'
 import { DARK_TEXT } from '../../../constants'
 
@@ -15,7 +15,7 @@ export default function CourseAdd ({
 
   return (
     <>
-      <div className='main-container' is-editing={ isEditing.toString() } aria-label='Add Course'>
+      <div className={ styles.mainContainer } is-editing={ isEditing.toString() } aria-label='Add Course'>
         { isEditing ?
           (
             <div>
@@ -28,10 +28,10 @@ export default function CourseAdd ({
             </div> 
           ) : (
             <div 
-              className='add-container' 
+              className={ styles.addContainer } 
               onClick={ () => setIsEditing(true) }
             >
-              <div className='content-container'>
+              <div className={ styles.contentContainer }>
                 <ControlPoint 
                   sx={{
                     fontSize: 80,
