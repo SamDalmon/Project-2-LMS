@@ -88,6 +88,7 @@ export default function AccountInfo(){
         }}
         open={open}
         onClose={handleClose}
+        marginThreshold={0}
         slotProps={{
           paper: {
             sx: {
