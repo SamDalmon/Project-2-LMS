@@ -1,4 +1,4 @@
-import './UserManagement.css'
+import styles from './UserManagement.module.css'
 import UserCard from '../../components/UserCard/UserCard';
 import EditUserCard from '../../components/EditUserCard/EditUserCard';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
@@ -88,7 +88,7 @@ export default function UserManagement () {
 
   return (
     <MainLayout content= {(
-      <div className='users-container'>
+      <div className={ styles.usersContainer }>
         {
           users.map(user => 
             editingId !== user.pk ? (

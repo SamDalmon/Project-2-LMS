@@ -1,6 +1,6 @@
 @import '@/index.css';
 
-.users-container {
+.usersContainer {
   display: flex;
   flex-direction: column;
   gap: 10px
