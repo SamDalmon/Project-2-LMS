@@ -14,7 +14,9 @@ dt {
 }
 
 dd { 
-  margin-left: 10px; 
+  margin-left: 10px;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
 }
 
 .card-container {
