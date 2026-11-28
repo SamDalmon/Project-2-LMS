@@ -10,6 +10,7 @@ img {
   background-color: var(--header-background-color);
   position: fixed;
   display: flex;
+  flex-direction: row;
   width: 100%;
   height: var(--header-height);
   justify-content: space-between;
@@ -20,6 +21,7 @@ img {
 .hero-container {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 
 .account-info-container{
@@ -50,8 +52,13 @@ img {
   border-bottom-right-radius: 10px;
   box-shadow: 8px 5px 10px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px -3px rgba(0, 0, 0, 0.14);
 }
+
 @media (width <= 700px) {
   .header {
     flex-direction: column;
   }
 
+  .app-title {
+    font-size: min(6cqi, var(--font-xl));
+  }
+}

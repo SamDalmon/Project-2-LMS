@@ -16,7 +16,7 @@ export default function Header () {
           <img id='fathom-logo' src={logo} 
             alt='Fathom logo, also link to home screen'
           />
-          <h1>{ APP_NAME }</h1>
+          <h1 className='app-title'>{ APP_NAME }</h1>
         </div>
         { isUserManagement && 
           <Link to='/courses' className='back-link'>
