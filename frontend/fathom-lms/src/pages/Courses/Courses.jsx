@@ -1,4 +1,4 @@
-import './Courses.css'
+import styles from './Courses.module.css'
 import { useState, useEffect, useMemo } from 'react';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import CourseTile from '../../components/CourseTiles/CourseTile/CourseTile';
@@ -109,7 +109,7 @@ export default function Courses () {
         /> 
       }
       <MainLayout content={ 
-          <div className='courses'>
+          <div className={ styles.courses }>
             {
               (canAddEdit && userActive) && (
                 <CourseAdd 
